@@ -24,11 +24,13 @@ import com.google.android.gms.location.LocationServices
 import com.wspyo.ondootdo.databinding.ActivityMainBinding
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
 import com.wspyo.ondootdo.viewModel.LocationViewModel
+import com.wspyo.ondootdo.viewModel.TemperatureViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private  val locationViewModel : LocationViewModel by activityViewModels()
+    private val locationViewModel : LocationViewModel by activityViewModels()
+    private val temperatureViewModel : TemperatureViewModel by activityViewModels()
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -72,17 +74,24 @@ class MainFragment : Fragment() {
             }
         }
 
-//        binding.getTemperatureButton.setOnClickListener{
-//            val latitude = locationViewModel.latitude
-//            val longitude = locationViewModel.longitude
-//
-//            Log.d("MainActivity",latitude.value.toString())
-//            Log.d("MainActivity",longitude.value.toString())
-//        }
+        binding.getTemperatureButton.setOnClickListener{
+            val latitude = locationViewModel.latitude
+            val longitude = locationViewModel.longitude
+
+            Log.d("MainActivity",latitude.value.toString())
+            Log.d("MainActivity",longitude.value.toString())
+            temperatureViewModel.getCurrentTemperature(latitude.value.toString().toDouble(),longitude.value.toString().toDouble(),"dd488c2e7a32df4bc1e362d36f4a53ad")
+        }
+
+        temperatureViewModel.temperature.observe(requireActivity()){
+            binding.TemperatureTextView.text = "현재 온도 : ${it.toString()}"
+        }
+
 
         binding.timeFragmentTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
         }
+
 
         return binding.root
     }
