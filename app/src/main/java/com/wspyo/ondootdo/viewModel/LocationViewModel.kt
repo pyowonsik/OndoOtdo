@@ -15,6 +15,16 @@ import com.google.android.gms.location.LocationResult
 
 class LocationViewModel(application: Application) : AndroidViewModel(application) {
 
+    private var _latitude = MutableLiveData<Double>()
+    val latitude : LiveData<Double>
+        get() = _latitude
+
+
+    private var _longitude = MutableLiveData<Double>()
+    val longitude : LiveData<Double>
+        get() = _longitude
+
+
     private val _locationData = MutableLiveData<String>()
     val locationData: LiveData<String> = _locationData
 
@@ -41,6 +51,10 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
                 if (location != null) {
                     val latitude = location.latitude
                     val longitude = location.longitude
+
+                    _latitude.value = latitude
+                    _longitude.value = longitude
+
                     _locationData.value = "위도: $latitude, 경도: $longitude"
                     convertCoordinatesToAddress(latitude, longitude)
                 } else {
