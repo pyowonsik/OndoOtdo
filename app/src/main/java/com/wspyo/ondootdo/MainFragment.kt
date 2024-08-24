@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.google.android.gms.location.LocationServices
 import com.wspyo.ondootdo.databinding.ActivityMainBinding
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
@@ -71,14 +72,17 @@ class MainFragment : Fragment() {
             }
         }
 
-        binding.getTemperatureButton.setOnClickListener{
-            val latitude = locationViewModel.latitude
-            val longitude = locationViewModel.longitude
+//        binding.getTemperatureButton.setOnClickListener{
+//            val latitude = locationViewModel.latitude
+//            val longitude = locationViewModel.longitude
+//
+//            Log.d("MainActivity",latitude.value.toString())
+//            Log.d("MainActivity",longitude.value.toString())
+//        }
 
-            Log.d("MainActivity",latitude.value.toString())
-            Log.d("MainActivity",longitude.value.toString())
+        binding.timeFragmentTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
         }
-
 
         return binding.root
     }
@@ -88,7 +92,6 @@ class MainFragment : Fragment() {
         val coarseLocationPermission = ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
         return fineLocationPermission && coarseLocationPermission
     }
-
     private fun checkLocationSettings() {
         val locationMode = Settings.Secure.getInt(
             requireActivity().contentResolver,
