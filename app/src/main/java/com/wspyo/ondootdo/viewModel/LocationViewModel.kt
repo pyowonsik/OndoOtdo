@@ -37,6 +37,7 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
         fusedLocationClient = client
     }
 
+
     fun getCurrentLocation() {
         val locationRequest = LocationRequest.create().apply {
             interval = 10000

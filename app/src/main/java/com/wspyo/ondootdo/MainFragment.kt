@@ -52,19 +52,27 @@ class MainFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
 
-
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         locationViewModel.setFusedLocationClient(fusedLocationClient)
 
         locationViewModel.locationData.observe(requireActivity(), Observer { locationText ->
-            binding.locationTextView.text = locationText
+            val latitude = locationViewModel.latitude
+            val longitude = locationViewModel.longitude
+
+            temperatureViewModel.getCurrentTemperature(
+                latitude.value.toString().toDouble(),
+                longitude.value.toString().toDouble(),
+                "dd488c2e7a32df4bc1e362d36f4a53ad")
         })
 
-        locationViewModel.addressData.observe(requireActivity(), Observer { addressText ->
-            binding.locationTextView.text = addressText
-        })
+        temperatureViewModel.weatherResponse.observe(requireActivity()){
+            binding.TemperatureTextView.text = "현재 온도 : ${it.main.getTempInCelsius().toString()}\n체감 온도 : ${it.main.getFeelsLikeInCelsius().toString()}"
+            locationViewModel.addressData.observe(requireActivity(), Observer { addressText ->
+                binding.locationTextView.text = addressText
+            })
+        }
 
-        binding.getLocationButton.setOnClickListener {
+//        binding.getCurrentLocationInfoButton.setOnClickListener {
             if (hasLocationPermissions()) {
                 checkLocationSettings()
             } else {
@@ -72,26 +80,11 @@ class MainFragment : Fragment() {
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
                 )
             }
-        }
-
-        binding.getTemperatureButton.setOnClickListener{
-            val latitude = locationViewModel.latitude
-            val longitude = locationViewModel.longitude
-
-            Log.d("MainActivity",latitude.value.toString())
-            Log.d("MainActivity",longitude.value.toString())
-            temperatureViewModel.getCurrentTemperature(latitude.value.toString().toDouble(),longitude.value.toString().toDouble(),"dd488c2e7a32df4bc1e362d36f4a53ad")
-        }
-
-        temperatureViewModel.temperature.observe(requireActivity()){
-            binding.TemperatureTextView.text = "현재 온도 : ${it.toString()}"
-        }
-
+//        }
 
         binding.timeFragmentTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
         }
-
 
         return binding.root
     }
