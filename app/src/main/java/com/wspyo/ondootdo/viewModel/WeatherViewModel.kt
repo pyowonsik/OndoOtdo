@@ -123,10 +123,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
     fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) = viewModelScope.launch{
         _weatherResponse.value = temperatureRepository.getCurrentTemperature(lat,lon,apiId)
     }
-
-
 }
