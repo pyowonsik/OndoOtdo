@@ -5,43 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.google.android.gms.location.LocationServices
-import com.wspyo.ondootdo.databinding.ActivityMainBinding
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
-import com.wspyo.ondootdo.viewModel.LocationViewModel
-import com.wspyo.ondootdo.viewModel.TemperatureViewModel
+import com.wspyo.ondootdo.viewModel.WeatherViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private val locationViewModel : LocationViewModel by activityViewModels()
-    private val temperatureViewModel : TemperatureViewModel by activityViewModels()
+    private lateinit var weatherViewModel : WeatherViewModel
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
-            val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-            if (fineLocationGranted || coarseLocationGranted) {
-                checkLocationSettings()
-            } else {
-                binding.locationTextView.text = "위치 권한이 필요합니다."
-            }
-        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -49,64 +22,19 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
 
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        locationViewModel.setFusedLocationClient(fusedLocationClient)
+        weatherViewModel = (requireActivity().application as MyApplication).weatherViewModel
 
-        locationViewModel.locationData.observe(requireActivity(), Observer { locationText ->
-            val latitude = locationViewModel.latitude
-            val longitude = locationViewModel.longitude
+//        Log.d("ViewModel Test : MainFragment",weatherViewModel.weatherResponse.value.toString())
 
-            temperatureViewModel.getCurrentTemperature(
-                latitude.value.toString().toDouble(),
-                longitude.value.toString().toDouble(),
-                "dd488c2e7a32df4bc1e362d36f4a53ad")
-        })
-
-        temperatureViewModel.weatherResponse.observe(requireActivity()){
-            binding.TemperatureTextView.text = "현재 온도 : ${it.main.getTempInCelsius().toString()}\n체감 온도 : ${it.main.getFeelsLikeInCelsius().toString()}"
-            locationViewModel.addressData.observe(requireActivity(), Observer { addressText ->
-                binding.locationTextView.text = addressText
-            })
-        }
-
-//        binding.getCurrentLocationInfoButton.setOnClickListener {
-            if (hasLocationPermissions()) {
-                checkLocationSettings()
-            } else {
-                requestPermissionLauncher.launch(
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-                )
-            }
-//        }
+        binding.TemperatureTextView.text = weatherViewModel.weatherResponse.value?.main?.getTempInCelsius().toString()
+        binding.locationTextView.text = weatherViewModel.address.value.toString()
 
         binding.timeFragmentTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
         }
 
         return binding.root
-    }
-
-    private fun hasLocationPermissions(): Boolean {
-        val fineLocationPermission = ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        val coarseLocationPermission = ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        return fineLocationPermission && coarseLocationPermission
-    }
-    private fun checkLocationSettings() {
-        val locationMode = Settings.Secure.getInt(
-            requireActivity().contentResolver,
-            Settings.Secure.LOCATION_MODE,
-            Settings.Secure.LOCATION_MODE_OFF
-        )
-
-        if (locationMode == Settings.Secure.LOCATION_MODE_OFF) {
-            binding.locationTextView.text = "위치 서비스가 비활성화되어 있습니다. 위치 서비스를 활성화해주세요."
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-        } else {
-            locationViewModel.getCurrentLocation()
-        }
     }
 }

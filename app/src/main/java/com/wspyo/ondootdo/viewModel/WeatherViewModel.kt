@@ -1,20 +1,29 @@
 package com.wspyo.ondootdo.viewModel
+
 import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.wspyo.ondootdo.model.WeatherResponse
+import com.wspyo.ondootdo.repository.TemperatureRepository
+import kotlinx.coroutines.launch
 
-class LocationViewModel(application: Application) : AndroidViewModel(application) {
+class WeatherViewModel(application: Application) : AndroidViewModel(application) {
 
+    // 위도,경도
     private var _latitude = MutableLiveData<Double>()
     val latitude : LiveData<Double>
         get() = _latitude
@@ -24,12 +33,18 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     val longitude : LiveData<Double>
         get() = _longitude
 
+    // 날씨
+    private var _weatherResponse = MutableLiveData<WeatherResponse>()
+    val weatherResponse : LiveData<WeatherResponse>
+        get() = _weatherResponse
 
-    private val _locationData = MutableLiveData<String>()
-    val locationData: LiveData<String> = _locationData
+    // 주소
+    private var _address = MutableLiveData<String>()
+    val address : LiveData<String>
+        get() = _address
 
-    private val _addressData = MutableLiveData<String>()
-    val addressData: LiveData<String> = _addressData
+
+    val temperatureRepository = TemperatureRepository()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -37,8 +52,8 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
         fusedLocationClient = client
     }
 
-
     fun getCurrentLocation() {
+
         val locationRequest = LocationRequest.create().apply {
             interval = 10000
             fastestInterval = 5000
@@ -47,19 +62,20 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
+
                 locationResult ?: return
                 val location = locationResult.lastLocation
                 if (location != null) {
-                    val latitude = location.latitude
-                    val longitude = location.longitude
 
-                    _latitude.value = latitude
-                    _longitude.value = longitude
+                    _latitude.value = location.latitude
+                    _longitude.value = location.longitude
 
-                    _locationData.value = "위도: $latitude, 경도: $longitude"
-                    convertCoordinatesToAddress(latitude, longitude)
+                    convertCoordinatesToAddress(latitude.value!!, longitude.value!!)
+                    getCurrentTemperature(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
                 } else {
-                    _locationData.value = "위치를 가져올 수 없습니다."
+//                    _locationData.value = "위치를 가져올 수 없습니다."
+                    Toast.makeText(getApplication(),"위치를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
+
                 }
             }
         }
@@ -83,7 +99,7 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, getApplication<Application>().mainLooper)
             .addOnFailureListener { e ->
-                _locationData.value = "위치 요청 실패: ${e.message}"
+                Toast.makeText(getApplication(),"위치 요청 실패: ${e.message}",Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -92,14 +108,25 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
         try {
             val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null && addresses.isNotEmpty()) {
-                val address = addresses[0]
-                val addressText = "주소: ${address.getAddressLine(0)}"
-                _addressData.value = addressText
+                var splitAddress = addresses[0].getAddressLine(0).split(" ")
+                Log.d("WeatherViewModel","${splitAddress[1] + " " + splitAddress[2]}")
+
+                val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
+                _address.value = addressText
             } else {
-                _addressData.value = "주소를 가져올 수 없습니다."
+                Toast.makeText(getApplication(),"주소를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
+
             }
         } catch (e: Exception) {
-            _addressData.value = "주소 변환 실패: ${e.message}"
+            Toast.makeText(getApplication(),"위치 서비스가 비활성화되어 있습니다. 위치 서비스를 활성화해주세요.",Toast.LENGTH_SHORT).show()
+
         }
     }
+
+
+    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) = viewModelScope.launch{
+        _weatherResponse.value = temperatureRepository.getCurrentTemperature(lat,lon,apiId)
+    }
+
+
 }
