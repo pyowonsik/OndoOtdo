@@ -14,4 +14,7 @@ interface TimeDao  {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertTime(text : TimeEntity)
 
+    @Query("DELETE FROM time_table")
+    fun deleteAllTimes()
+
 }

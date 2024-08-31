@@ -9,5 +9,7 @@ class TimeRepository(context : Context) {
     val db = CommonDataBase.getDatabase(context)
 
     fun getAllTimes() = db.timeDao().getAllTimes()
-    fun insertTime(time : String) = db.timeDao().insertTime(TimeEntity(0,time))
+    fun insertTime(time : String) = db.timeDao().insertTime(TimeEntity(0,time,true))
+
+    fun deleteAllTimes() = db.timeDao().deleteAllTimes()
 }

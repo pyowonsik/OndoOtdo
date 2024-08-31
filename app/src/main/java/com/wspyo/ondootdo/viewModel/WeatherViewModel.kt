@@ -44,7 +44,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         get() = _address
 
 
-    val temperatureRepository = TemperatureRepository()
+    private val temperatureRepository = TemperatureRepository()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
