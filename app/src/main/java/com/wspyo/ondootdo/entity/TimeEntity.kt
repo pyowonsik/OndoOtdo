@@ -11,5 +11,7 @@ data class TimeEntity (
     @ColumnInfo(name = "id")
     var id : Int,
     @ColumnInfo(name = "word")
-    var time : String
+    var time : String,
+    // alarm on/off
+    var alarm : Boolean,
 )
