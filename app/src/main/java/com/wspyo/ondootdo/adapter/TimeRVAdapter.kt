@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wspyo.ondootdo.R
+import com.wspyo.ondootdo.entity.TimeEntity
 
-class TimeRVAdapter(val items : List<String>,val context : Context) : RecyclerView.Adapter<TimeRVAdapter.ViewHolder>() {
+class TimeRVAdapter(val items : List<TimeEntity>,val context : Context) : RecyclerView.Adapter<TimeRVAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val textView : TextView = view.findViewById(R.id.timeArea)
     }
@@ -19,7 +21,7 @@ class TimeRVAdapter(val items : List<String>,val context : Context) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: TimeRVAdapter.ViewHolder, position: Int) {
-        holder.textView.text = items[position]
+        holder.textView.text = items[position].time
     }
 
     override fun getItemCount(): Int {
