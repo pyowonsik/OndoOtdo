@@ -13,5 +13,6 @@ data class TimeEntity (
     @ColumnInfo(name = "word")
     var time : String,
     // alarm on/off
-    var alarm : Boolean,
+    @ColumnInfo(name = "is_enabled")
+    var isEnabled : Boolean,
 )

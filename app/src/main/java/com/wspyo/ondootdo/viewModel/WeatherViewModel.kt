@@ -109,7 +109,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null && addresses.isNotEmpty()) {
                 var splitAddress = addresses[0].getAddressLine(0).split(" ")
-                Log.d("WeatherViewModel","${splitAddress[1] + " " + splitAddress[2]}")
+//                Log.d("WeatherViewModel","${splitAddress[1] + " " + splitAddress[2]}")
 
                 val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
                 _address.value = addressText

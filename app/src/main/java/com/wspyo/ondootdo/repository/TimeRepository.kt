@@ -12,4 +12,6 @@ class TimeRepository(context : Context) {
     fun insertTime(time : String) = db.timeDao().insertTime(TimeEntity(0,time,true))
 
     fun deleteAllTimes() = db.timeDao().deleteAllTimes()
+
+    fun updateAlarmStatus(id:Int , isEnabled : Boolean) = db.timeDao().updateAlarmStatus(id,isEnabled)
 }

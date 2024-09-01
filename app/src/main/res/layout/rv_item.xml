@@ -12,6 +12,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginLeft="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +22,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/toggle"
+        android:src="@drawable/toggle_on"
         android:padding="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"

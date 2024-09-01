@@ -24,17 +24,19 @@ class TimesViewModel(application: Application) : AndroidViewModel(application){
 //       _times.value = timeRepository.getAllTimes()
 //        _times.postValue(timeRepository.getAllTimes())
         _times.postValue(timeRepository.getAllTimes())
-//        Log.d("SettingFragment",times.value.toString())
-//        Log.d("SettingFragment",timeRepository.getAllTimes().toString())
-
     }
 
     fun insertTime(time : String) = viewModelScope.launch(Dispatchers.IO) {
         timeRepository.insertTime(time)
+        getAllTimes()
     }
 
     fun deleteAllTimes() = viewModelScope.launch(Dispatchers.IO) {
         timeRepository.deleteAllTimes()
+        getAllTimes()
     }
 
+    fun updateAlarmStatus(id : Int , isEnabled : Boolean) = viewModelScope.launch(Dispatchers.IO){
+        timeRepository.updateAlarmStatus(id,isEnabled)
+    }
 }

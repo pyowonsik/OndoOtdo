@@ -8,7 +8,7 @@ import com.wspyo.ondootdo.dao.TimeDao
 import com.wspyo.ondootdo.entity.TimeEntity
 
 
-@Database(entities = [TimeEntity::class], version = 1)
+@Database(entities = [TimeEntity::class], version = 3)
 abstract class CommonDataBase : RoomDatabase(){
 
     abstract fun timeDao() : TimeDao

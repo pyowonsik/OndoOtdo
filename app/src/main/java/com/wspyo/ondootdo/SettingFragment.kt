@@ -46,8 +46,6 @@ class SettingFragment : Fragment() {
         })
         //
 
-
-
         binding.timeAddBtn.setOnClickListener(){
             showTimePickerDialog()
         }
@@ -72,7 +70,6 @@ class SettingFragment : Fragment() {
             { _, selectedHour, selectedMinute ->
                 val selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
                 timesViewModel.insertTime(selectedTime)
-
                 rvAdapter.notifyDataSetChanged()
             },
             hour, minute, true
