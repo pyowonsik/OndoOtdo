@@ -38,5 +38,6 @@ class TimesViewModel(application: Application) : AndroidViewModel(application){
 
     fun updateAlarmStatus(id : Int , isEnabled : Boolean) = viewModelScope.launch(Dispatchers.IO){
         timeRepository.updateAlarmStatus(id,isEnabled)
+        getAllTimes()
     }
 }
