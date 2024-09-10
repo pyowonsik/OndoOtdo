@@ -43,6 +43,12 @@ class SettingFragment : Fragment() {
             rvAdapter = TimeRVAdapter(it as MutableList<TimeEntity>, requireContext())
             rv.adapter = rvAdapter
             rv.layoutManager = LinearLayoutManager(requireContext())
+
+            rvAdapter.itemClick = object : TimeRVAdapter.ItemClick {
+                override fun onClick(view: View, position: Int) {
+                    timesViewModel.updateAlarmStatus(it[position].id,!it[position].isEnabled)
+                }
+            }
         })
         //
 
@@ -58,6 +64,8 @@ class SettingFragment : Fragment() {
             it.findNavController().navigate(R.id.action_settingFragment_to_mainFragment)
         }
 
+
+
         return binding.root
     }
     private fun showTimePickerDialog() {
@@ -70,7 +78,7 @@ class SettingFragment : Fragment() {
             { _, selectedHour, selectedMinute ->
                 val selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
                 timesViewModel.insertTime(selectedTime)
-                rvAdapter.notifyDataSetChanged()
+//                rvAdapter.notifyDataSetChanged()
             },
             hour, minute, true
         )

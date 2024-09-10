@@ -78,14 +78,18 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/deleteAllBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:contentDescription="Floating Action Button"
+                app:backgroundTint="@color/white"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/time_rv"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:srcCompat="@drawable/delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
