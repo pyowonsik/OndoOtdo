@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
+import com.wspyo.ondootdo.model.WeatherResponse
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
 
 class MainFragment : Fragment() {
@@ -25,11 +26,12 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
 
         weatherViewModel = (requireActivity().application as MyApplication).weatherViewModel
-
+        val weatherResponse : WeatherResponse? = weatherViewModel.weatherResponse.value
 //        Log.d("ViewModel Test : MainFragment",weatherViewModel.weatherResponse.value.toString())
 
-        binding.TemperatureTextView.text = weatherViewModel.weatherResponse.value?.main?.getTempInCelsius().toString()
+        binding.TemperatureTextView.text = weatherResponse?.main?.getTempInCelsius().toString()
         binding.locationTextView.text = weatherViewModel.address.value.toString()
+        binding.WeatherTextView.text = weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString()
 
         binding.timeFragmentTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
