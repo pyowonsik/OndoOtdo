@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SettingFragment"
-        android:background="@color/main1">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -19,12 +19,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="날씨 알람"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/timeAddBtn"
@@ -37,14 +38,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#000000"
+                app:layout_constraintBottom_toTopOf="@+id/time_rv" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/time_rv"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#000000"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -63,8 +77,13 @@
                     android:gravity="center"
                     android:text="Main"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"
+                    android:background="#000000" />
 
                 <TextView
                     android:id="@+id/timeFragmentTab"
@@ -74,8 +93,8 @@
                     android:gravity="center"
                     android:text="Time"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -85,7 +104,7 @@
                 android:layout_gravity="end|bottom"
                 android:layout_margin="16dp"
                 android:contentDescription="Floating Action Button"
-                app:backgroundTint="@color/white"
+                app:backgroundTint="@color/light_gray"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="@+id/time_rv"
                 app:layout_constraintEnd_toEndOf="parent"

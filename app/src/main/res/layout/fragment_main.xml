@@ -137,19 +137,19 @@
 <!--                android:textStyle="bold"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView" />-->
 
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="20dp"-->
-<!--                android:layout_marginTop="24dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="반팔,얇은 셔츠,반바지,면바지"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/WearTextView"-->
-<!--                tools:layout_editor_absoluteX="46dp" />-->
+            <TextView
+                android:id="@+id/WearTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="wear"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView"
+                tools:layout_editor_absoluteX="46dp" />
 
 
             <View

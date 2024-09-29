@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom TimePickerDialog Style -->
+    <style name="CustomTimePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <!-- Primary color (e.g. header background) -->
+        <item name="colorPrimary">@color/blue_primary</item>
+        <!-- Accent color (e.g. OK and Cancel buttons) -->
+        <item name="colorAccent">@color/light_gray</item>
+        <!-- Background color (dialog background) -->
+        <item name="android:background">@color/light_gray</item>
+        <!-- Text color -->
+        <item name="android:textColorPrimary">@color/dark_gray_text</item>
+        <!-- Button text color -->
+        <item name="android:textColor">@color/dark_gray_text</item>
+    </style>
+</resources>

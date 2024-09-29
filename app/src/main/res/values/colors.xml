@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main1">#5fa8d3</color>
     <color name="main2">#EDF6F9</color>
+    <color name="light_gray">#D3D3D3</color>
+
+    <color name="blue_primary">#2196F3</color> <!-- 차분한 블루 -->
+    <color name="orange_accent">#FF9800</color> <!-- 밝은 오렌지 -->
+    <color name="light_gray_background">#F5F5F5</color> <!-- 밝은 그레이 -->
+    <color name="dark_gray_text">#333333</color> <!-- 다크 그레이 텍스트 -->
+
 </resources>
