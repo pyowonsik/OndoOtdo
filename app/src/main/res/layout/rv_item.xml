@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_marginLeft="8dp"
@@ -29,6 +29,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 <!--    <Switch-->
 <!--        android:id="@+id/alarmSwitch"-->

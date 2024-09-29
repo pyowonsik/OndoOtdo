@@ -75,10 +75,10 @@ class SettingFragment : Fragment() {
 
         val timePickerDialog = TimePickerDialog(
             requireContext(),
+            R.style.CustomTimePickerDialog, // 스타일 적용
             { _, selectedHour, selectedMinute ->
                 val selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
                 timesViewModel.insertTime(selectedTime)
-//                rvAdapter.notifyDataSetChanged()
             },
             hour, minute, true
         )
