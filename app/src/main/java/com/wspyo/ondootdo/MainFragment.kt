@@ -22,6 +22,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var weatherViewModel : WeatherViewModel
 
+
     // 28 ~    : 민소매 , 반팔 , 반바지 , 원피스
     // 27 ~ 23 : 반팔 , 얇은 셔츠 , 반바지 , 면바지
     // 22 ~ 20 : 얇은 가디건 , 긴팔 , 면바지 , 청바지
@@ -53,9 +54,14 @@ class MainFragment : Fragment() {
         binding.locationTextView.text = weatherViewModel.address.value.toString()
         binding.WeatherTextView.text = weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString()
 
-        binding.timeFragmentTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
-        }
+//        binding.timeFragmentTab.setOnClickListener(){
+//            it.findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
+//        }
+//
+//        binding.searchFragmentTab.setOnClickListener(){
+//            it.findNavController().navigate(R.id.action_mainFragment_to_searchFragment)
+//        }
+
 
         // 오늘 날짜 가져오기
         val currentDate = Date()
@@ -83,4 +89,5 @@ class MainFragment : Fragment() {
         }
         binding.WearTextView.text = outfit.joinToString(", ")
     }
+
 }

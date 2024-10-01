@@ -60,9 +60,13 @@ class SettingFragment : Fragment() {
             timesViewModel.deleteAllTimes()
         }
 
-        binding.mainFragmentTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_settingFragment_to_mainFragment)
-        }
+//        binding.mainFragmentTab.setOnClickListener(){
+//            it.findNavController().navigate(R.id.action_settingFragment_to_mainFragment)
+//        }
+//
+//        binding.searchFragmentTab.setOnClickListener(){
+//            it.findNavController().navigate(R.id.action_settingFragment_to_searchFragment)
+//        }
 
 
 

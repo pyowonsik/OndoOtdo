@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wspyo.ondootdo.databinding.ActivityMainBinding
 import com.wspyo.ondootdo.entity.TimeEntity
 import com.wspyo.ondootdo.viewModel.TimesViewModel
@@ -26,12 +27,48 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var timesViewModel: TimesViewModel
+    private lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         timesViewModel = ViewModelProvider(this).get(TimesViewModel::class.java)
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        // 초기 Fragment 설정 및  BottomNavigationView 클릭 리스너 설정
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MainFragment())
+                .commit()
+        }
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, MainFragment())
+                        .commit()
+                    true
+                }
+                R.id.nav_settings-> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, SettingFragment())
+                        .commit()
+                    true
+                }
+                R.id.nav_search -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, SearchFragment())
+                        .commit()
+                    true
+                }
+                else -> false
+            }
+        }
+        //
 
         // notification channel 생성
         createNotificationChannel()
