@@ -46,14 +46,21 @@ class SplashActivity : AppCompatActivity() {
             )
         }
 
+
         weatherViewModel.weatherResponse.observe(this){
-//            Log.d("SplashActivity",it.main.getTempInCelsius().toString())
-            if(it.main.getTempInCelsius() != null){
-//                Handler().postDelayed({
-//                Log.d("ViewModel Test : SplashActivity",weatherViewModel.weatherResponse.value.toString())
-                startActivity(Intent(this,MainActivity::class.java))
+//            if(it.main.getTempInCelsius() != null){
+////                Handler().postDelayed({
+////                Log.d("ViewModel Test : SplashActivity",weatherViewModel.weatherResponse.value.toString())
+//                startActivity(Intent(this,MainActivity::class.java))
+//                finish()
+////                },3000)
+//            }
+            if (it.main.getTempInCelsius() != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                // 스플래시 화면 종료 후 MainActivity를 시작
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
                 finish()
-//                },3000)
             }
         }
     }
