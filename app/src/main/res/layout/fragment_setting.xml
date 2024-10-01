@@ -70,7 +70,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/mainFragmentTab"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:background="#000000" />
 
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/timeFragmentTab"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_height="match_parent"
                     android:background="#000000" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/weatherFragmentTab"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
