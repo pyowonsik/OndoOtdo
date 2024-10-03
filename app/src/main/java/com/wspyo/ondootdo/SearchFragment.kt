@@ -23,14 +23,6 @@ class SearchFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container,false)
 
-//        binding.mainFragmentTab.setOnClickListener(){
-//            it.findNavController().navigate(R.id.action_searchFragment_to_mainFragment)
-//        }
-//
-//        binding.timeFragmentTab.setOnClickListener(){
-//            it.findNavController().navigate(R.id.action_searchFragment_to_settingFragment)
-//        }
-
         return binding.root
     }
 }

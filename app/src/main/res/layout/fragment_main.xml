@@ -124,19 +124,6 @@
 
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/WearTextView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="20dp"-->
-<!--                android:layout_marginTop="24dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="오늘의 옷은 ? "-->
-<!--                android:textSize="25sp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView" />-->
-
             <TextView
                 android:id="@+id/WearTextView"
                 android:layout_width="match_parent"
@@ -150,22 +137,6 @@
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView" />
 
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="5dp"-->
-<!--                android:background="#000000"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />-->
-
-<!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--                android:id="@+id/bottom_navigation"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="?android:attr/windowBackground"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:menu="@menu/bottom_nav_menu"-->
-<!--                app:itemIconTint="@color/black"-->
-<!--                app:itemTextColor="@color/black"-->
-<!--                />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
