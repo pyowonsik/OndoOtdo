@@ -60,12 +60,6 @@ class SettingFragment : Fragment() {
             timesViewModel.deleteAllTimes()
         }
 
-        binding.mainFragmentTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_settingFragment_to_mainFragment)
-        }
-
-
-
         return binding.root
     }
     private fun showTimePickerDialog() {

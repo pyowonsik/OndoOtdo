@@ -16,10 +16,10 @@ data class Main(
     private fun roundToFirstDecimal(value: Double): Double {
         return (value * 10.0).roundToInt() / 10.0
     }
-    fun getTempInCelsius(): Double {
-        return roundToFirstDecimal(temp - 273.15)
+    fun getTempInCelsius(): Int {
+        return Math.round(roundToFirstDecimal(temp - 273.15)).toInt()
     }
-    fun getFeelsLikeInCelsius(): Double {
-        return roundToFirstDecimal(feelsLike - 273.15)
-    }
+//    fun getFeelsLikeInCelsius(): Double {
+//        return roundToFirstDecimal(feelsLike - 273.15)
+//    }
 }
