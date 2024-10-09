@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.OndoOtdo" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item> <!-- 상태바 색상 -->
-        <item name="colorAccent">@color/white</item>
-        <item name="android:statusBarColor">@color/white</item> <!-- 상태바 색상 설정 -->
+        <item name="colorPrimary">@color/very_light_yellow</item>
+        <item name="colorPrimaryDark">@color/very_light_yellow</item> <!-- 상태바 색상 -->
+        <item name="colorAccent">@color/very_light_yellow</item>
+        <item name="android:statusBarColor">@color/very_light_yellow</item> <!-- 상태바 색상 설정 -->
 <!--        <item name="android:windowLightStatusBar">true</item> &lt;!&ndash; 상태바 텍스트 색상 (검정색) 설정 &ndash;&gt;-->
     </style>
 

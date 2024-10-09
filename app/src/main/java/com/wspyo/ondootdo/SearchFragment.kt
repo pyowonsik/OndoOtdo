@@ -1,6 +1,7 @@
 package com.wspyo.ondootdo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,13 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container,false)
+
+
+        binding.SearchBtn.setOnClickListener{
+//            Log.d("SearchFragment",binding.searchEditTextArea.text.toString())
+//            지역 검색 -> 검색어를 이용해 좌표값 -> 좌표 값을 이용해 weatherApi 호출
+        }
+
 
         return binding.root
     }

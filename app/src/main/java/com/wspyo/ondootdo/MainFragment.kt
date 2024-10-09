@@ -2,6 +2,7 @@ package com.wspyo.ondootdo
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +24,8 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var weatherViewModel : WeatherViewModel
-    private lateinit var wearsList : MutableList<Wear>
-    private lateinit var rvAdapter: WearRVAdapter
-
-
+//    private lateinit var wearsList : MutableList<Wear>
+//    private lateinit var rvAdapter: WearRVAdapter
 
     // 28 ~    : 민소매 , 반팔 , 반바지 , 원피스
     // 27 ~ 23 : 반팔 , 얇은 셔츠 , 반바지 , 면바지
@@ -36,7 +35,6 @@ class MainFragment : Fragment() {
     // 11 ~ 9  : 자켓 , 트렌치코트 , 야상 , 니트 , 청바지 , 스타킹
     // 8 ~ 5   : 코트 , 가죽자켓 , 히트텍 , 니트 , 레깅스
     // 4 ~     : 패딩 , 두꺼운코트 , 목도리 , 기모제품
-
 
     // 비 - 우산 , 우비
     // 눈 - 핫팩
@@ -55,37 +53,50 @@ class MainFragment : Fragment() {
         val weatherResponse : WeatherResponse? = weatherViewModel.weatherResponse.value
 //        Log.d("ViewModel Test : MainFragment",weatherViewModel.weatherResponse.value.toString())
 
-        binding.TemperatureTextView.text = weatherResponse?.main?.getTempInCelsius().toString() + "°"
-        binding.locationTextView.text = weatherViewModel.address.value.toString()
-        binding.WeatherTextView.text = weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString()
+        binding.TemperatureArea.text = weatherResponse?.main?.getTempInCelsius().toString() + "°C"
+        binding.TitleTextArea.text = weatherViewModel.address.value.toString() + "의 오늘의 날씨"
+        val imageName = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weatherImg"]
+        val resourceId = resources.getIdentifier(imageName, "drawable", requireContext().packageName)
+        binding.WeatherImageArea.setImageResource(resourceId)
+        binding.WeatherArea.text = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weather"]
 
-
-        // 오늘 날짜 가져오기
-        val currentDate = Date()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val formattedDate = dateFormat.format(currentDate)
-        binding.dateTextView.text = formattedDate
-
-        wearsList = getOutfitByTemperature(weatherResponse?.main?.getTempInCelsius()!!)
-
-        val wearRv = binding.wearRv
-
-        rvAdapter = WearRVAdapter(wearsList)
-        wearRv.adapter = rvAdapter
-        wearRv.layoutManager =  GridLayoutManager(requireContext(),2)
-
+//        wearsList = getOutfitByTemperature(weatherResponse?.main?.getTempInCelsius()!!)
+//        val wearRv = binding.wearRv
+//        rvAdapter = WearRVAdapter(wearsList)
+//        wearRv.adapter = rvAdapter
+//        wearRv.layoutManager =  GridLayoutManager(requireContext(),2)
 //        getOutfitByTemperature(weatherResponse?.main?.getTempInCelsius()!!)
-        binding.description1.text = "오늘 날씨는 21도입니다.\n날씨가 상대적으로 시원하니 얇은 가디건 하나 챙기시는 걸 추천드려요.\n긴팔과 청바지도 적당한 선택일 거예요!"
+
+        val precipitation =
+            if(weatherResponse?.snow != null) weatherResponse?.snow?.oneHour
+            else if(weatherResponse?.rain != null) weatherResponse.rain.oneHour
+            else 0.0
+
+        binding.Precipitation.text = "${precipitation}mm"
+        if(weatherResponse?.snow != null) binding.PrecipitationImageArea.setImageResource(R.drawable.fall)
+        if(weatherResponse?.snow != null) binding.PrecipitationTitleArea.text = "강우량(mm/hr)"
+
+        binding.SunLight.text = weatherResponse?.sys?.getCurrentSunLight().toString() + "시간"
+
+        binding.RecommendWearInfoArea.text = "날씨가 상대적으로 시원하니 얇은 가디건 하나 챙기시는 걸 추천드려요.\n긴팔과 청바지도 적당한 선택일 거예요!"
 
         return binding.root
     }
 
+    private fun getCurrentWeather(weather:String) : MutableMap<String,String> {
+        return when (weather) {
+            "Clear" -> mutableMapOf("weatherImg" to "clear", "weather" to "맑음")
+            "Clouds" -> mutableMapOf("weatherImg" to "cloud", "weather" to "흐림")
+            "Rain" -> mutableMapOf("weatherImg" to "rain", "weather" to "비")
+            "Snow" -> mutableMapOf("weatherImg" to "snow", "weather" to "눈")
+            else -> mutableMapOf()
+        }
+    }
 
     private fun getDrawableIdByName(context: Context, name: String): Int {
         return context.resources.getIdentifier(name, "drawable", context.packageName)
     }
     private fun getOutfitByTemperature(temperature: Int) : MutableList<Wear> {
-
 
         val wear1 = mutableListOf<Wear>(
             Wear(getDrawableIdByName(requireContext(), "sleeveless_shirt"), "민소매"),
