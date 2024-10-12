@@ -6,9 +6,23 @@
     <color name="main2">#EDF6F9</color>
     <color name="light_gray">#D3D3D3</color>
 
-    <color name="blue_primary">#2196F3</color> <!-- 차분한 블루 -->
-    <color name="orange_accent">#FF9800</color> <!-- 밝은 오렌지 -->
-    <color name="light_gray_background">#F5F5F5</color> <!-- 밝은 그레이 -->
-    <color name="dark_gray_text">#333333</color> <!-- 다크 그레이 텍스트 -->
+    <color name="blue_primary">#2196F3</color>
+    <color name="orange_accent">#FF9800</color>
+    <color name="light_gray_background">#F5F5F5</color>
+    <color name="dark_gray_text">#333333</color>
+
+
+
+    <color name="cream">#F5F5DC</color>
+    <color name="light_brown">#D2B48C</color>
+    <color name="dark_brown">#8B4513</color>
+    <color name="dark_orange">#FF8C00</color>
+    <color name="olive_green">#556B2F</color>
+    
+    
+    <color name="pastel_sky">#AEC6CF</color>
+    <color name="blue">#2563EB</color>
+    <color name="light_blue">#DBEAFE</color>
+    <color name="very_light_yellow">#FFFBEB</color>
 
 </resources>

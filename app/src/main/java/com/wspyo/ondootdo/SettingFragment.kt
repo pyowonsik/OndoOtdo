@@ -56,9 +56,9 @@ class SettingFragment : Fragment() {
             showTimePickerDialog()
         }
 
-        binding.deleteAllBtn.setOnClickListener{
-            timesViewModel.deleteAllTimes()
-        }
+//        binding.DeleteAllBtn.setOnClickListener{
+//            timesViewModel.deleteAllTimes()
+//        }
 
         return binding.root
     }

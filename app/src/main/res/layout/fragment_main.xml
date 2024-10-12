@@ -7,149 +7,240 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainFragment"
-        android:background="@color/white" >
+        android:background="@color/very_light_yellow" >
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/TodayWeatherTextView"
+                android:id="@+id/TitleTextArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="오늘의 날씨 일기"
+                android:text="오늘의 날씨"
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:textSize="40sp"
                 android:layout_marginTop="20dp"
+                android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/TodayWeatherTextViewLine"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="#000000"
-                android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/TodayWeatherTextView" />
-
-            <LinearLayout
-                android:id="@+id/dateLayout"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:elevation="8dp"
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TodayWeatherTextViewLine">
+                android:layout_margin="20dp"
+                android:background="@drawable/border_rounded"
+                app:layout_constraintTop_toBottomOf="@+id/TitleTextArea"
+                tools:layout_editor_absoluteX="20dp">
 
-                <TextView
-                    android:id="@+id/dateTextView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="2024-09-22"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="5dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"
-                    app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/WeatherImageArea"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <TextView
+                        android:id="@+id/TemperatureTitleArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="기온"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/TemperatureArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2°C"
+                        android:textColor="@color/dark_brown"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/TemperatureTitleArea" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/WeatherImageArea"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/clear"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/WeatherImageArea"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/WeatherTitleArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="날씨"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/WeatherArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="맑음"
+                        android:textColor="@color/dark_orange"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/WeatherTitleArea" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_margin="20dp"
+                android:id="@+id/AdditionalInformationArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_rounded"
+                android:elevation="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <TextView
-                    android:id="@+id/WeatherTextView"
+                    android:id="@+id/AdditionalInformationTitleArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="weather"
+                    android:text="추가 정보"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/dateTextViewLine"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
-
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="제목 : 오늘은 맑음"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateTextViewLine" />
-
-            <View
-                android:id="@+id/titleTextViewLine"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
-
-            <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/locationTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="location"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTextViewLine" />
-
-            <TextView
-                android:id="@+id/TemperatureTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="temperature"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/wear_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView" />
-
-
-            <LinearLayout
-                android:layout_marginTop="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/wearDescriptionArea"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/wear_rv"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/description1"
-                    android:text="description1"
-                    android:textSize="15sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/AdditionalInformationContentArea"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/AdditionalInformationTitleArea">
+
+                    <TextView
+                        android:id="@+id/PrecipitationTitleArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="강수량(mm/hr)"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/PrecipitationImageArea"
+                        android:layout_width="100dp"
+                        android:layout_height="200dp"
+                        android:src="@drawable/precipitation"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/PrecipitationTitleArea" />
+
+                    <TextView
+                        android:id="@+id/Precipitation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 mm"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/PrecipitationImageArea"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/PrecipitationImageArea" />
+
+
+                    <TextView
+                        android:id="@+id/SunLightTitleArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘의 일조량"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageView
+                        android:id="@+id/SunLightImageArea"
+                        android:layout_width="100dp"
+                        android:layout_height="200dp"
+                        android:src="@drawable/sun_light"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/SunLightTitleArea" />
+
+                    <TextView
+                        android:id="@+id/SunLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8 시간"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/SunLightImageArea"
+                        app:layout_constraintTop_toBottomOf="@+id/SunLightImageArea" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/RecommendWearArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/border_rounded"
+                android:elevation="8dp"
+                android:padding="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/AdditionalInformationArea">
+
+                <TextView
+                    android:id="@+id/RecommendWearTitleArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오늘의 옷 추천"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/RecommendWearInfoArea"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="recommend description"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/RecommendWearTitleArea" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

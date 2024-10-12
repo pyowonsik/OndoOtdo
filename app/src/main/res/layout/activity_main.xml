@@ -15,11 +15,11 @@
 
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:background="#000000"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />-->
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"

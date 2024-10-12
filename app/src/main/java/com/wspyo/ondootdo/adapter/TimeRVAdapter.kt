@@ -32,8 +32,8 @@ class TimeRVAdapter(
     var itemClick: ItemClick? = null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.timeArea)
-        val alarmButton: ImageButton = view.findViewById(R.id.alarmBtn)
+        val textView: TextView = view.findViewById(R.id.TimeArea)
+        val alarmButton: ImageButton = view.findViewById(R.id.AlarmBtn)
 //        val alarmSwitch : Switch = view.findViewById(R.id.alarmSwitch)
 
         fun bindItems(timeEntity: TimeEntity) {

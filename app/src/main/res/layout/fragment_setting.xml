@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SettingFragment"
-        android:background="@color/white">
+        android:background="@color/very_light_yellow">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="날씨 알람"
+                android:text="알람 설정"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -26,23 +26,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <ImageButton
                 android:id="@+id/timeAddBtn"
-                android:layout_marginRight="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/time_add"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="#000000"
-                app:layout_constraintBottom_toTopOf="@+id/time_rv" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/dark_brown" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/time_rv"
@@ -54,19 +49,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/deleteAllBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:contentDescription="Floating Action Button"
-                app:backgroundTint="@color/light_gray"
-                app:fabSize="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/time_rv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/delete"
-            />
+
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/DeleteAllBtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="end|bottom"-->
+<!--                android:layout_margin="16dp"-->
+<!--                android:contentDescription="Floating Action Button"-->
+<!--                app:backgroundTint="@color/light_gray"-->
+<!--                app:fabSize="normal"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/time_rv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:srcCompat="@drawable/delete" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

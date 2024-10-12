@@ -108,10 +108,11 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         try {
             val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null && addresses.isNotEmpty()) {
+//                Log.d("WeatherViewModel","${addresses}")
                 var splitAddress = addresses[0].getAddressLine(0).split(" ")
-//                Log.d("WeatherViewModel","${splitAddress[1] + " " + splitAddress[2]}")
+//                val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
+                val addressText = "${splitAddress[2]}"
 
-                val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
                 _address.value = addressText
             } else {
                 Toast.makeText(getApplication(),"주소를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
