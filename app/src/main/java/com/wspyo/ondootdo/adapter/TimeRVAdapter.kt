@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.wspyo.ondootdo.R
 import com.wspyo.ondootdo.entity.TimeEntity
@@ -27,34 +28,34 @@ class TimeRVAdapter(
 
     interface ItemClick {
         fun onClick(view: View, position: Int)
+        fun alarmClick(view : View, position: Int)
     }
 
     var itemClick: ItemClick? = null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val timeItemArea : ConstraintLayout = view.findViewById(R.id.TimeItemArea)
         val textView: TextView = view.findViewById(R.id.TimeArea)
         val alarmButton: ImageButton = view.findViewById(R.id.AlarmBtn)
-//        val alarmSwitch : Switch = view.findViewById(R.id.alarmSwitch)
 
         fun bindItems(timeEntity: TimeEntity) {
             textView.text = timeEntity.time
-            if(timeEntity.isEnabled) {
-                alarmButton.setImageResource(R.drawable.toggle_on)
-//                alarmSwitch.isChecked = true
-            }
-            else {
-                alarmButton.setImageResource(R.drawable.toggle_off)
-//                alarmSwitch.isChecked = false
-            }
+
+            if(timeEntity.isEnabled) alarmButton.setImageResource(R.drawable.toggle_on)
+            else alarmButton.setImageResource(R.drawable.toggle_off)
+
         }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(items[position])
 
-        // 버튼 클릭 이벤트 처리
         holder.alarmButton.setOnClickListener {
-            itemClick?.onClick(it, position)
+            itemClick?.alarmClick(it, position)
+        }
+
+        holder.timeItemArea.setOnClickListener{
+            itemClick?.onClick(it , position)
         }
     }
 }

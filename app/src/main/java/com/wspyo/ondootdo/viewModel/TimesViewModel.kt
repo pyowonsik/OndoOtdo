@@ -36,6 +36,16 @@ class TimesViewModel(application: Application) : AndroidViewModel(application){
         getAllTimes()
     }
 
+    fun deleteTime(id : Int) = viewModelScope.launch(Dispatchers.IO){
+        timeRepository.deleteTime(id)
+        getAllTimes()
+    }
+
+    fun updateTime(id : Int , time : String) = viewModelScope.launch(Dispatchers.IO) {
+        timeRepository.updateTime(id,time)
+        getAllTimes()
+    }
+
     fun updateAlarmStatus(id : Int , isEnabled : Boolean) = viewModelScope.launch(Dispatchers.IO){
         timeRepository.updateAlarmStatus(id,isEnabled)
         getAllTimes()
