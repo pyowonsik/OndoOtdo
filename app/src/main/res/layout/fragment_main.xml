@@ -72,7 +72,7 @@
                     android:id="@+id/WeatherImageArea"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/sun"
+                    android:src="@drawable/clear"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -232,7 +232,7 @@
                     android:id="@+id/RecommendWearInfoArea"
                     android:textSize="15sp"
                     android:textColor="@color/black"
-                    android:text="긴팔 : 추천합니다\n반팔 : 가능합니다.\n바지 : 추천합니다!"
+                    android:text="recommend description"
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -241,202 +241,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/RecommendWearTitleArea" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--            <TextView-->
-<!--                android:id="@+id/textView"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="20°"-->
-<!--                android:textColor="@color/dark_orange"-->
-<!--                android:textSize="40sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_marginTop="50dp"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/imageView"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/TitleTextArea" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="150dp"-->
-<!--                android:src="@drawable/sun"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/TitleTextArea" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="맑음"-->
-<!--                android:textColor="@color/dark_orange"-->
-<!--                android:textSize="40sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_marginTop="50dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/imageView"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/TitleTextArea" />-->
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_margin="20dp"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:background="@drawable/border_straight"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/TodayWeatherTextView">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_margin="20dp"-->
-            <!--                    android:text="날짜"-->
-            <!--                    android:textSize="20sp"-->
-            <!--                    android:textStyle="bold"-->
-            <!--                    android:textColor="@color/dark_brown"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"/>-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_margin="20dp"-->
-            <!--                    android:text="지역"-->
-            <!--                    android:textSize="20sp"-->
-            <!--                    android:textStyle="bold"-->
-            <!--                    android:textColor="@color/dark_brown"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"/>-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_margin="20dp"-->
-            <!--                    android:text="날씨"-->
-            <!--                    android:textSize="20sp"-->
-            <!--                    android:textStyle="bold"-->
-            <!--                    android:textColor="@color/dark_brown"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"/>-->
-            <!--            </LinearLayout>-->
-
-
-            <!--            <View-->
-            <!--                android:id="@+id/TodayWeatherTextViewLine"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="5dp"-->
-            <!--                android:background="#000000"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/TodayWeatherTextView" />-->
-
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/dateLayout"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/TodayWeatherTextViewLine">-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/dateTextView"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:text="2024-09-22"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textSize="30sp"-->
-            <!--                    android:textStyle="bold" />-->
-
-            <!--                <View-->
-            <!--                    android:layout_width="5dp"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    android:background="#000000"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@+id/dateLayout" />-->
-
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/WeatherTextView"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginLeft="10dp"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:text="weather"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textSize="30sp"-->
-            <!--                    android:textStyle="bold" />-->
-
-            <!--            </LinearLayout>-->
-
-            <!--            <View-->
-            <!--                android:id="@+id/dateTextViewLine"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="5dp"-->
-            <!--                android:background="#000000"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/dateLayout" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/titleTextView"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="제목 : 오늘은 맑음"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="30sp"-->
-            <!--                android:textStyle="bold"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/dateTextViewLine" />-->
-
-            <!--            <View-->
-            <!--                android:id="@+id/titleTextViewLine"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="5dp"-->
-            <!--                android:background="#000000"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />-->
-
-            <!--            <TextView-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:id="@+id/locationTextView"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:text="location"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="20dp"-->
-            <!--                android:textStyle="bold"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/titleTextViewLine" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/TemperatureTextView"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:text="temperature"-->
-            <!--                android:textSize="40sp"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/locationTextView" />-->
-
-
-            <!--            <androidx.recyclerview.widget.RecyclerView-->
-            <!--                android:id="@+id/wear_rv"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="50dp"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView" />-->
-
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_marginTop="80dp"-->
-            <!--                android:layout_marginLeft="20dp"-->
-            <!--                android:layout_marginRight="20dp"-->
-            <!--                android:id="@+id/wearDescriptionArea"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/wear_rv"-->
-            <!--                android:orientation="vertical"-->
-            <!--                >-->
-            <!--                <TextView-->
-            <!--                    android:id="@+id/description1"-->
-            <!--                    android:text="description1"-->
-            <!--                    android:textSize="15sp"-->
-            <!--                    android:textStyle="bold"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"/>-->
-            <!--            </LinearLayout>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
