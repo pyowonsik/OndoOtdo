@@ -17,7 +17,12 @@ interface TimeDao  {
     @Query("DELETE FROM time_table")
     fun deleteAllTimes()
 
-    // 특정 ID의 알람 상태를 업데이트하는 메서드
+    @Query("DELETE FROM time_table WHERE id = :id")
+    fun deleteTime(id : Int)
+
+    @Query("UPDATE time_table SET time = :time WHERE id = :id")
+    fun updateTime(id : Int , time : String)
+
     @Query("UPDATE time_table SET is_enabled = :isEnabled WHERE id = :id")
     fun updateAlarmStatus(id: Int, isEnabled: Boolean)
 

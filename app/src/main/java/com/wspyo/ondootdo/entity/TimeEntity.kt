@@ -10,7 +10,7 @@ data class TimeEntity (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id : Int,
-    @ColumnInfo(name = "word")
+    @ColumnInfo(name = "time")
     var time : String,
     // alarm on/off
     @ColumnInfo(name = "is_enabled")
