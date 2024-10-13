@@ -1,6 +1,6 @@
 package com.wspyo.ondootdo.api
 
-import com.wspyo.ondootdo.model.WeatherResponse
+import com.wspyo.ondootdo.model.weather.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

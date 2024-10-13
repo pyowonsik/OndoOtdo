@@ -8,12 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.wspyo.ondootdo.databinding.FragmentSearchBinding
+import com.wspyo.ondootdo.repository.LocalRepository
+import com.wspyo.ondootdo.viewModel.LocalViewModel
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
+    private lateinit var localViewModel: LocalViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +30,17 @@ class SearchFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container,false)
 
+        localViewModel = ViewModelProvider(this).get(LocalViewModel::class.java)
+
         binding.SearchBtn.setOnClickListener{
 //            Log.d("SearchFragment",binding.searchEditTextArea.text.toString())
 //            지역 검색 -> 검색어를 이용해 좌표값 -> 좌표 값을 이용해 weatherApi 호출
 //            Toast.makeText(requireContext(),binding.searchEditTextArea.text.toString(),Toast.LENGTH_SHORT).show()
-            var searchAddress = binding.searchEditTextArea.text
-
+            var searchPlace = binding.searchEditTextArea.text.toString()
+            localViewModel.getPlaceResponse(searchPlace)
+//            localViewModel.placeResponse.observe(viewLifecycleOwner) {
+//                Log.d("SearchFragment", it.toString())
+//            }
         }
 
 

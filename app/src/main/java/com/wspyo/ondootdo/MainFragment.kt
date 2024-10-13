@@ -1,7 +1,5 @@
 package com.wspyo.ondootdo
 
-import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -15,17 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.wspyo.ondootdo.adapter.WearRVAdapter
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
-import com.wspyo.ondootdo.model.Wear
-import com.wspyo.ondootdo.model.WeatherResponse
+import com.wspyo.ondootdo.model.weather.WeatherResponse
 
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class MainFragment : Fragment() {
 

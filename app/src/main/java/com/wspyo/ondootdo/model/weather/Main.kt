@@ -1,4 +1,4 @@
-package com.wspyo.ondootdo.model
+package com.wspyo.ondootdo.model.weather
 
 import com.google.gson.annotations.SerializedName
 import kotlin.math.roundToInt

@@ -3,13 +3,13 @@ package com.wspyo.ondootdo.api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
+object LocalServiceInstance {
 
-    val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+    private const val KAKAO_BASE_URL = "https://dapi.kakao.com/"
 
     val client = Retrofit
         .Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(KAKAO_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

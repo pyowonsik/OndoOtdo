@@ -1,4 +1,4 @@
-package com.wspyo.ondootdo.model
+package com.wspyo.ondootdo.model.weather
 
 data class Wear(
     val imageUrl : Int,

@@ -24,7 +24,7 @@ abstract class CommonDataBase : RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CommonDataBase::class.java,
-                    "text_database"
+                    "time_database"
                 )
                     .fallbackToDestructiveMigration()
                     .build()

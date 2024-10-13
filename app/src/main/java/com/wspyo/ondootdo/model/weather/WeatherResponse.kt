@@ -1,4 +1,4 @@
-package com.wspyo.ondootdo.model
+package com.wspyo.ondootdo.model.weather
 import com.google.gson.annotations.SerializedName
 
 // retrofit의 반환 값은 model 로 매핑

@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wspyo.ondootdo.R
-import com.wspyo.ondootdo.entity.TimeEntity
-import com.wspyo.ondootdo.model.Wear
+import com.wspyo.ondootdo.model.weather.Wear
 
 
 class WearRVAdapter(private val items: MutableList<Wear>)

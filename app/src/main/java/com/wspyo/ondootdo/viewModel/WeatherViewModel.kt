@@ -5,10 +5,8 @@ import android.app.Application
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +15,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
-import com.wspyo.ondootdo.model.WeatherResponse
+import com.wspyo.ondootdo.model.weather.WeatherResponse
 import com.wspyo.ondootdo.repository.TemperatureRepository
 import kotlinx.coroutines.launch
 
