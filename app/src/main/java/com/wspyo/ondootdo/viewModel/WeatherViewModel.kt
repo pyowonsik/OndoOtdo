@@ -111,7 +111,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 //                Log.d("WeatherViewModel","${addresses}")
                 var splitAddress = addresses[0].getAddressLine(0).split(" ")
 //                val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
-                val addressText = "${splitAddress[2]}"
+                val addressText = "${splitAddress[1]}"
 
                 _address.value = addressText
             } else {

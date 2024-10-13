@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
         val weatherResponse : WeatherResponse? = weatherViewModel.weatherResponse.value
 
         binding.TemperatureArea.text = weatherResponse?.main?.getTempInCelsius().toString() + "°C"
-        binding.TitleTextArea.text = weatherViewModel.address.value.toString() + "의 오늘의 날씨"
+        binding.TitleTextArea.text = weatherViewModel.address.value.toString() + " 오늘의 날씨"
         val imageName = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weatherImg"]
         val resourceId = resources.getIdentifier(imageName, "drawable", requireContext().packageName)
         binding.WeatherImageArea.setImageResource(resourceId)
