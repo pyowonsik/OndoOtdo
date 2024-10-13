@@ -68,6 +68,10 @@ class SettingFragment : Fragment() {
             dialogFragment.show(parentFragmentManager, "customTimePicker")
         }
 
+        binding.DeleteAllBtn.setOnClickListener(){
+            timesViewModel.deleteAllTimes()
+        }
+
 
         return binding.root
     }

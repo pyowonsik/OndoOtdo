@@ -5,35 +5,31 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- TimePicker 추가 -->
     <TimePicker
+        android:layout_gravity="center"
         android:id="@+id/custom_time_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner" />
 
-    <!-- 버튼 레이아웃 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="center">
 
-        <!-- 추가된 버튼 -->
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="삭제" />
 
-        <!-- 기본 "확인" 버튼 -->
         <Button
             android:id="@+id/positive_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="설정" />
 
-        <!-- 기본 "취소" 버튼 -->
         <Button
             android:id="@+id/negative_button"
             android:layout_width="wrap_content"
