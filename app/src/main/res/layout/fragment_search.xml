@@ -26,48 +26,44 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
-
-            <EditText
-                android:id="@+id/searchEditTextArea"
+            <RelativeLayout
+                android:id="@+id/SearchBarArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="100dp"
-                android:layout_marginTop="50dp"
-                android:background="@android:color/transparent"
-                app:layout_constraintTop_toBottomOf="@+id/titleText" />
+                android:layout_margin="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/titleText">
 
-            <View
-                android:id="@+id/searchEditTextLine"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="100dp"
-                app:layout_constraintTop_toBottomOf="@+id/searchEditTextArea" />
 
-            <Button
-                android:id="@+id/SearchBtn"
-                android:text="검색"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/white"
-                android:background="@color/dark_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/searchEditTextLine"
-                app:layout_constraintStart_toEndOf="@+id/searchEditTextLine" />
+                <!-- EditText -->
+                <EditText
+                    android:id="@+id/searchEditTextArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="검색어를 입력하세요"
+                    android:paddingRight="48dp" />
+
+                <!-- 아이콘 추가 -->
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/search_tab"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp" />
+            </RelativeLayout>
+
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/SearchBarArea" />
 
-                app:layout_constraintTop_toBottomOf="@+id/searchEditTextLine" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -73,6 +73,7 @@ fun getCurrentWeather(weather:String) : MutableMap<String,String> {
         "Clouds" -> mutableMapOf("weatherImg" to "cloud", "weather" to "흐림")
         "Rain" -> mutableMapOf("weatherImg" to "rain", "weather" to "비")
         "Snow" -> mutableMapOf("weatherImg" to "snow", "weather" to "눈")
+
         else -> mutableMapOf()
     }
 }
