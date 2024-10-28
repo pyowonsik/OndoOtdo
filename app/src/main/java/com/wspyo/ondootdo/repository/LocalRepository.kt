@@ -9,5 +9,5 @@ import retrofit2.http.Query
 
 class LocalRepository {
     val localServiceInstance = LocalServiceInstance.getInstance().create(LocalService::class.java)
-    suspend fun searchPlace(apiKey : String , query: String , page : Int) = localServiceInstance.searchPlace(apiKey,query,page)
+    suspend fun searchPlace(apiKey : String , query: String) = localServiceInstance.searchPlace(apiKey,query)
 }

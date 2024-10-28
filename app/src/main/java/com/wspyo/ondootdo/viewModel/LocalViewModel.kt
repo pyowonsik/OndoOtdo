@@ -22,6 +22,8 @@ class LocalViewModel(application: Application) : AndroidViewModel(application) {
 //        localRepository.searchPlace("KakaoAK 90f0265925e2ac638fc4f1d766fd270d","까치산역 스타벅스",1)
 //        Log.d("LocalViewModel", localRepository.searchPlace("KakaoAK 90f0265925e2ac638fc4f1d766fd270d","까치산역 스타벅스",1)
 //            .toString())
-        _placeResponse.value = localRepository.searchPlace("KakaoAK 90f0265925e2ac638fc4f1d766fd270d",searchPlace,1)
+        _placeResponse.value = localRepository.searchPlace("KakaoAK 90f0265925e2ac638fc4f1d766fd270d",searchPlace + "구청")
+//        Log.d("LocalViewModel",_placeResponse.value!!.documents.filter { it.place_name == "강남구청" }.toString())
     }
 }
+

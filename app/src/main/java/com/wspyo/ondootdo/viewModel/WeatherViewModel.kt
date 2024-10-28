@@ -73,7 +73,6 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
                 } else {
 //                    _locationData.value = "위치를 가져올 수 없습니다."
                     Toast.makeText(getApplication(),"위치를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
@@ -122,7 +121,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) = viewModelScope.launch{
+    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) =
+        viewModelScope.launch{
         _weatherResponse.value = temperatureRepository.getCurrentTemperature(lat,lon,apiId)
     }
 }

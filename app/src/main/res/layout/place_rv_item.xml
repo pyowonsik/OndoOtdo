@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/TimeItemArea"
+    android:id="@+id/PlaceItemArea"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,49 +11,37 @@
     android:layout_margin="20dp">
 
     <TextView
-        android:id="@+id/TimeTitleArea"
+        android:id="@+id/PlaceTitleArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 알람"
+        android:text="주소"
         android:textSize="20sp"
         android:layout_marginLeft="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TimeArea"
+        android:id="@+id/PlaceArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time"
+        android:text="Place"
         android:textColor="@color/dark_brown"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimeTitleArea" />
-
+        app:layout_constraintTop_toBottomOf="@+id/PlaceTitleArea" />
 
     <TextView
-        android:id="@+id/AlarmTitleArea"
+        android:id="@+id/AddressArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/AlarmBtn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/toggle_on"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AlarmTitleArea" />
-
-
+        android:text="Address"
+        android:textColor="@color/dark_orange"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PlaceArea" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
