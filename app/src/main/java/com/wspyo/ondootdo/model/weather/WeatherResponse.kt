@@ -1,5 +1,6 @@
-package com.wspyo.ondootdo.model
+package com.wspyo.ondootdo.model.weather
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 // retrofit의 반환 값은 model 로 매핑
 data class WeatherResponse(
@@ -8,7 +9,7 @@ data class WeatherResponse(
     @SerializedName("sys") val sys: Sys,
     @SerializedName("rain") val rain: Rain?,  // nullable 처리
     @SerializedName("snow") val snow: Snow?   // nullable 처리
-)
+) : Serializable
 
 data class Rain(
     @SerializedName("1h") val oneHour: Double?,   // 지난 1시간 강수량 (nullable)
