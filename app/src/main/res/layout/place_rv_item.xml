@@ -8,14 +8,14 @@
     android:layout_height="100dp"
     android:background="@drawable/border_rounded"
     android:elevation="8dp"
-    android:layout_margin="20dp">
+    android:layout_margin="15dp">
 
     <TextView
         android:id="@+id/PlaceTitleArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="주소"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_marginLeft="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Place"
         android:textColor="@color/dark_brown"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="Address"
         android:textColor="@color/dark_orange"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
