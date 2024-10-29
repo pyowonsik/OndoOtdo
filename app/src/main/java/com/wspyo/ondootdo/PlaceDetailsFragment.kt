@@ -49,8 +49,6 @@ class PlaceDetailsFragment : DialogFragment() {
 
         val weatherResponse : WeatherResponse = arguments?.getSerializable("weatherResponse") as WeatherResponse
 
-
-
         binding.TitleTextArea.text = ""
 
         val imageName = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weatherImg"]
