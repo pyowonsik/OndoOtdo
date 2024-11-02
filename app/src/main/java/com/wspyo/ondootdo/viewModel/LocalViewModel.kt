@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wspyo.ondootdo.model.local.Document
 import com.wspyo.ondootdo.model.local.PlaceResponse
 import com.wspyo.ondootdo.repository.LocalRepository
 import kotlinx.coroutines.launch
@@ -15,6 +16,8 @@ class LocalViewModel(application: Application) : AndroidViewModel(application) {
     private var _placeResponse = MutableLiveData<PlaceResponse>()
     val placeResponse : LiveData<PlaceResponse>
         get() = _placeResponse
+
+
 
     val localRepository  = LocalRepository()
 

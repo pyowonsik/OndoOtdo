@@ -16,11 +16,12 @@ class PlaceDetailsFragment : DialogFragment() {
     private  lateinit var  binding : FragmentPlaceDetailsBinding
 
     companion object {
-        fun newInstance(weatherResponse : WeatherResponse): PlaceDetailsFragment {
+        fun newInstance(weatherResponse : WeatherResponse,placeName : String): PlaceDetailsFragment {
             val fragment = PlaceDetailsFragment()
 
             val args = Bundle()
             args.putSerializable("weatherResponse", weatherResponse)
+            args.putString("placeName",placeName)
 
             fragment.arguments = args
             return fragment
@@ -35,7 +36,7 @@ class PlaceDetailsFragment : DialogFragment() {
 
         val weatherResponse : WeatherResponse = arguments?.getSerializable("weatherResponse") as WeatherResponse
 
-        binding.TitleTextArea.text = ""
+        binding.TitleTextArea.text = arguments?.getString("placeName")
 
         val imageName = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weatherImg"]
         val resourceId = resources.getIdentifier(imageName, "drawable", requireContext().packageName)
