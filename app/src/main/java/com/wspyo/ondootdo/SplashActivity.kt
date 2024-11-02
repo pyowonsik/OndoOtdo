@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -55,12 +57,20 @@ class SplashActivity : AppCompatActivity() {
 //                finish()
 ////                },3000)
 //            }
+
+
             if (it.main.getTempInCelsius() != null) {
                 val intent = Intent(this, MainActivity::class.java)
                 // 스플래시 화면 종료 후 MainActivity를 시작
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
-                finish()
+
+//                // 약간의 지연을 주어 `finish()` 호출
+//                Handler(Looper.getMainLooper()).postDelayed({
+//                    finish()
+//                }, 300)
+
+
             }
         }
     }

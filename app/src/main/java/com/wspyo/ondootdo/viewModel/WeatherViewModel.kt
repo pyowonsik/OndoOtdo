@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.AndroidViewModel
@@ -105,10 +106,10 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         try {
             val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null && addresses.isNotEmpty()) {
-//                Log.d("WeatherViewModel","${addresses}")
-                var splitAddress = addresses[0].getAddressLine(0).split(" ")
+//                var splitAddress = addresses[0].getAddressLine(0).split(" ")
 //                val addressText = "${splitAddress[1] + " " + splitAddress[2]}"
-                val addressText = "${splitAddress[1]}"
+
+                val addressText = addresses[0].adminArea
 
                 _address.value = addressText
             } else {
