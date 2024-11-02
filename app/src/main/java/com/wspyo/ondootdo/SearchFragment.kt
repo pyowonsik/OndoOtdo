@@ -18,16 +18,16 @@ import com.wspyo.ondootdo.viewModel.PlaceDetailsViewModel
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private lateinit var localViewModel: LocalViewModel
+    private val localViewModel: LocalViewModel by activityViewModels ()
     private lateinit var placeRVAdapter: PlaceRVAdapter
     private val placeDetailViewModel : PlaceDetailsViewModel by activityViewModels()
-
+    private var isDialogOpen : Boolean = false
+    private lateinit var placeName : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container,false)
-        localViewModel = ViewModelProvider(this).get(LocalViewModel::class.java)
 
         val rv = binding.rv
 
@@ -48,12 +48,16 @@ class SearchFragment : Fragment() {
                     // 클릭시 placeDetailViewModel의 weatherResponse 데이터 변경
                     // -> 변경이 된 데이터를 감지하여 해당 데이터로 place detail Dialog open
                     val document = placeResponse.documents[position]
-                    Log.d("SearchFragment",  document.toString())
+//                    Log.d("SearchFragment",  document.toString())
+
+                    isDialogOpen = true
+
+                    placeName = document.place_name
 
                     placeDetailViewModel.getPlaceDetailWeather(
-                        document.y.toDouble(),
-                        document.x.toDouble(),
-                        "dd488c2e7a32df4bc1e362d36f4a53ad"
+                            document.y.toDouble(),
+                            document.x.toDouble(),
+                            "dd488c2e7a32df4bc1e362d36f4a53ad"
                     )
                 }
             }
@@ -61,15 +65,16 @@ class SearchFragment : Fragment() {
 
         // weatherResponse 관찰자는 최초에 한 번만 등록
         placeDetailViewModel.weatherResponse.observe(viewLifecycleOwner) { temperature ->
-            Log.d("SearchFragment", temperature.toString())
-            val dialogFragment = PlaceDetailsFragment.newInstance(temperature)
-            dialogFragment.show(parentFragmentManager, "placeDetail")
+                if(isDialogOpen){
+                    val dialogFragment = PlaceDetailsFragment.newInstance(temperature,placeName)
+                    dialogFragment.show(parentFragmentManager, "placeDetail")
+                }
         }
 
         // 검색 버튼 클릭 시에만 데이터 요청
         binding.searchIcon.setOnClickListener {
             val searchPlace = binding.searchEditTextArea.text.toString()
-            Log.d("SearchFragment", "Search initiated with query: $searchPlace")
+//            Log.d("SearchFragment", "Search initiated with query: $searchPlace")
 
             // 지역 검색 요청
             localViewModel.getPlaceResponse(searchPlace)
