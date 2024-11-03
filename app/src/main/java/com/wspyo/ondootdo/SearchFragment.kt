@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -36,9 +38,25 @@ class SearchFragment : Fragment() {
         rv.adapter = placeRVAdapter
         rv.layoutManager = LinearLayoutManager(requireContext())
 
+        if(localViewModel.placeResponse.value == null ){
+            binding.rv.visibility = View.GONE
+            binding.EmptyDataArea.visibility = View.VISIBLE
+        }
+
         // placeResponse 관찰자도 한 번만 설정
         localViewModel.placeResponse.observe(viewLifecycleOwner) { placeResponse ->
             placeRVAdapter.updateData(placeResponse.documents)
+
+
+            if(placeResponse != null){
+                binding.rv.visibility = View.VISIBLE
+                binding.EmptyDataArea.visibility = View.GONE
+            }
+
+            if(placeResponse.documents.isEmpty()){
+                binding.rv.visibility = View.GONE
+                binding.EmptyDataArea.visibility = View.VISIBLE
+            }
 
             // PlaceRVAdapter의 아이템 클릭 리스너 설정
             placeRVAdapter.itemClick = object : PlaceRVAdapter.ItemClick {
@@ -73,11 +91,15 @@ class SearchFragment : Fragment() {
 
         // 검색 버튼 클릭 시에만 데이터 요청
         binding.searchIcon.setOnClickListener {
-            val searchPlace = binding.searchEditTextArea.text.toString()
-//            Log.d("SearchFragment", "Search initiated with query: $searchPlace")
 
-            // 지역 검색 요청
-            localViewModel.getPlaceResponse(searchPlace)
+            if(binding.searchEditTextArea.text.toString() == "") {
+                Toast.makeText(requireContext(),"주소를 입력해주세요.",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val searchPlace = binding.searchEditTextArea.text.toString()
+                localViewModel.getPlaceResponse(searchPlace)
+            }
+
         }
 
         return binding.root
