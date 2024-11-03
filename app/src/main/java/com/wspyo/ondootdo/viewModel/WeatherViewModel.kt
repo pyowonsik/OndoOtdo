@@ -1,5 +1,7 @@
 package com.wspyo.ondootdo.viewModel
 
+import WeatherForecast
+import WeatherForecastResponse
 import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
@@ -42,6 +44,10 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     val address : LiveData<String>
         get() = _address
 
+    private var _weatherForecast = MutableLiveData<WeatherForecastResponse>()
+    val weatherForecast : LiveData<WeatherForecastResponse>
+        get() = _weatherForecast
+
 
     private val temperatureRepository = TemperatureRepository()
 
@@ -71,6 +77,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 
                     convertCoordinatesToAddress(latitude.value!!, longitude.value!!)
                     getCurrentTemperature(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
+                    getWeatherForecast(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
+
                 } else {
 //                    _locationData.value = "위치를 가져올 수 없습니다."
                     Toast.makeText(getApplication(),"위치를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
@@ -122,8 +130,12 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) =
-        viewModelScope.launch{
+    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) = viewModelScope.launch{
         _weatherResponse.value = temperatureRepository.getCurrentTemperature(lat,lon,apiId)
     }
+
+    fun getWeatherForecast(lat : Double,lon : Double , apiId : String) =
+        viewModelScope.launch{
+            _weatherForecast.value = temperatureRepository.getWeatherForecast(lat,lon,apiId)
+        }
 }

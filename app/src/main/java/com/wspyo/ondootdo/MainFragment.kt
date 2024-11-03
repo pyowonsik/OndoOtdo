@@ -45,7 +45,9 @@ class MainFragment : Fragment() {
         binding.WeatherImageArea.setImageResource(resourceId)
         binding.WeatherArea.text = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weather"]
 
-        Log.d("MainFragment",weatherResponse?.rain.toString())
+//        weatherViewModel.weatherForecast.observe(viewLifecycleOwner){
+//            Log.d("MainFragment",it.toString())
+//        }
 
         val precipitation =
             if(weatherResponse?.snow != null) weatherResponse?.snow?.oneHour
