@@ -73,7 +73,17 @@ fun getCurrentWeather(weather:String) : MutableMap<String,String> {
         "Clouds" -> mutableMapOf("weatherImg" to "cloud", "weather" to "흐림")
         "Rain" -> mutableMapOf("weatherImg" to "rain", "weather" to "비")
         "Snow" -> mutableMapOf("weatherImg" to "snow", "weather" to "눈")
-
+        "Drizzle" -> mutableMapOf("weatherImg" to "rain", "weather" to "이슬비")
+        "Mist" -> mutableMapOf("weatherImg" to "strong_cloud", "weather" to "안개")
+        "Smoke" -> mutableMapOf("weatherImg" to "cloud", "weather" to "연기")
+        "Snow" -> mutableMapOf("weatherImg" to "cloud", "weather" to "실안개")
+        "Dust" -> mutableMapOf("weatherImg" to "cloud", "weather" to "먼지")
+        "Fog" -> mutableMapOf("weatherImg" to "strong_cloud", "weather" to "안개")
+        "Sand" -> mutableMapOf("weatherImg" to "cloud", "weather" to "모래")
+        "Ash" -> mutableMapOf("weatherImg" to "cloud", "weather" to "먼지")
+        "Thunderstorm" -> mutableMapOf("weatherImg" to "strong_rain", "weather" to "천둥번개")
+        "Squall" -> mutableMapOf("weatherImg" to "strong_rain", "weather" to "돌풍")
+        "Tornado" -> mutableMapOf("weatherImg" to "strong_rain", "weather" to "토네이도")
         else -> mutableMapOf()
     }
 }

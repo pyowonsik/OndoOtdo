@@ -42,13 +42,27 @@ class SettingFragment : Fragment() {
 
         val rv = binding.timeRv
 
-
         // Fragment에서 데이터 observe 할때는 , viewLifecycleOwner 사용
         timesViewModel.getAllTimes()
+
+
+        if(timesViewModel.times.value == null || timesViewModel.times.value!!.isEmpty() ){
+            binding.rv.visibility = View.GONE
+            binding.EmptyDataArea.visibility = View.VISIBLE
+        }
         timesViewModel.times.observe(viewLifecycleOwner, Observer {
             rvAdapter = TimeRVAdapter(it as MutableList<TimeEntity>, requireContext())
             rv.adapter = rvAdapter
             rv.layoutManager = LinearLayoutManager(requireContext())
+
+
+            if(timesViewModel.times.value == null || timesViewModel.times.value!!.isEmpty() ){
+                binding.rv.visibility = View.GONE
+                binding.EmptyDataArea.visibility = View.VISIBLE
+            }else{
+                binding.rv.visibility = View.VISIBLE
+                binding.EmptyDataArea.visibility = View.GONE
+            }
 
             rvAdapter.itemClick = object : TimeRVAdapter.ItemClick {
                 override fun onClick(view: View, position: Int) {
