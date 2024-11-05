@@ -33,6 +33,17 @@
         app:layout_constraintTop_toBottomOf="@+id/PlaceTitleArea" />
 
     <TextView
+        android:id="@+id/CategoryArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textSize="15sp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/AddressArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

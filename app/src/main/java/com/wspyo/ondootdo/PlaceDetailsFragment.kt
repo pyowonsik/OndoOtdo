@@ -2,6 +2,7 @@ package com.wspyo.ondootdo
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -27,6 +28,7 @@ class PlaceDetailsFragment : DialogFragment() {
             return fragment
         }
     }
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
@@ -63,5 +65,7 @@ class PlaceDetailsFragment : DialogFragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 배경 투명 설정
         return dialog
     }
+
+
 
 }

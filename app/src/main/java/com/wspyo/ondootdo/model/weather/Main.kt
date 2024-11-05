@@ -19,7 +19,7 @@ data class Main(
     fun getTempInCelsius(): Int {
         return Math.round(roundToFirstDecimal(temp - 273.15)).toInt()
     }
-//    fun getFeelsLikeInCelsius(): Double {
-//        return roundToFirstDecimal(feelsLike - 273.15)
-//    }
+    fun getFeelsLikeInCelsius(): Int {
+        return Math.round(roundToFirstDecimal(feelsLike - 273.15)).toInt()
+    }
 }
