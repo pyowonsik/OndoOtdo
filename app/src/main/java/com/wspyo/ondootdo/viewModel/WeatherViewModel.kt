@@ -1,5 +1,7 @@
 package com.wspyo.ondootdo.viewModel
 
+import WeatherForecast
+import WeatherForecastResponse
 import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -42,6 +45,20 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     val address : LiveData<String>
         get() = _address
 
+    private var _weatherForecast = MutableLiveData<WeatherForecastResponse>()
+    val weatherForecast : LiveData<WeatherForecastResponse>
+        get() = _weatherForecast
+
+    // weatherResponse 와 weatherForecast 값을 동시에 관찰 하면서 두값 모두 null이 아니면 true
+    val isWeatherDataLoaded = MediatorLiveData<Boolean>().apply {
+        addSource(weatherResponse) { response ->
+            value = response != null && weatherForecast.value != null
+        }
+        addSource(weatherForecast) { forecast ->
+            value = forecast != null && weatherResponse.value != null
+        }
+    }
+
 
     private val temperatureRepository = TemperatureRepository()
 
@@ -60,22 +77,24 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
 
         val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
+                override fun onLocationResult(locationResult: LocationResult) {
 
-                locationResult ?: return
-                val location = locationResult.lastLocation
-                if (location != null) {
+                    locationResult ?: return
+                    val location = locationResult.lastLocation
+                    if (location != null) {
 
-                    _latitude.value = location.latitude
-                    _longitude.value = location.longitude
+                        _latitude.value = location.latitude
+                        _longitude.value = location.longitude
 
-                    convertCoordinatesToAddress(latitude.value!!, longitude.value!!)
-                    getCurrentTemperature(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
-                } else {
-//                    _locationData.value = "위치를 가져올 수 없습니다."
-                    Toast.makeText(getApplication(),"위치를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
+                        convertCoordinatesToAddress(latitude.value!!, longitude.value!!)
+                        getCurrentTemperature(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
+                        getWeatherForecast(latitude.value!!,longitude.value!!,"dd488c2e7a32df4bc1e362d36f4a53ad")
+
+
+                    } else {
+                        Toast.makeText(getApplication(),"위치를 가져올 수 없습니다.",Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
         }
 
         if (ActivityCompat.checkSelfPermission(
@@ -122,8 +141,12 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) =
-        viewModelScope.launch{
+    fun getCurrentTemperature(lat : Double,lon : Double , apiId : String) = viewModelScope.launch{
         _weatherResponse.value = temperatureRepository.getCurrentTemperature(lat,lon,apiId)
     }
+
+    fun getWeatherForecast(lat : Double,lon : Double , apiId : String) =
+        viewModelScope.launch{
+            _weatherForecast.value = temperatureRepository.getWeatherForecast(lat,lon,apiId)
+        }
 }
