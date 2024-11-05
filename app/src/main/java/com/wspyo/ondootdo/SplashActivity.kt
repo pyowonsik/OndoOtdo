@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -48,29 +49,13 @@ class SplashActivity : AppCompatActivity() {
             )
         }
 
-
-        weatherViewModel.weatherResponse.observe(this){
-//            if(it.main.getTempInCelsius() != null){
-////                Handler().postDelayed({
-////                Log.d("ViewModel Test : SplashActivity",weatherViewModel.weatherResponse.value.toString())
-//                startActivity(Intent(this,MainActivity::class.java))
-//                finish()
-////                },3000)
-//            }
-
-
-            if (it.main.getTempInCelsius() != null) {
+        weatherViewModel.isWeatherDataLoaded.observe(this) { isLoaded ->
+            if (isLoaded == true) {
                 val intent = Intent(this, MainActivity::class.java)
-                // 스플래시 화면 종료 후 MainActivity를 시작
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
-
-//                // 약간의 지연을 주어 `finish()` 호출
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    finish()
-//                }, 300)
-
-
+            } else {
+                Log.d("SplashActivity", "데이터 로드 중: weatherResponse = ${weatherViewModel.weatherResponse.value}, weatherForecast = ${weatherViewModel.weatherForecast.value}")
             }
         }
     }
