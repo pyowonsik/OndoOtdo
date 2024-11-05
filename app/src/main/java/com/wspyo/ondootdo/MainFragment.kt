@@ -15,7 +15,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.wspyo.ondootdo.adapter.TimeRVAdapter
+import com.wspyo.ondootdo.adapter.WeatherRVAdapter
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
+import com.wspyo.ondootdo.entity.TimeEntity
 import com.wspyo.ondootdo.model.weather.WeatherResponse
 
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
@@ -48,19 +52,26 @@ class MainFragment : Fragment() {
         binding.WeatherArea.text = getCurrentWeather(weatherResponse?.weather?.firstOrNull()?.getCurrentWeather().toString())["weather"]
 
 
-        val precipitation =
-            if(weatherResponse?.snow != null) weatherResponse?.snow?.oneHour
-            else if(weatherResponse?.rain != null) weatherResponse.rain.oneHour
-            else 0.0
+//        val precipitation =
+//            if(weatherResponse?.snow != null) weatherResponse?.snow?.oneHour
+//            else if(weatherResponse?.rain != null) weatherResponse.rain.oneHour
+//            else 0.0
 
-        binding.Precipitation.text = "${precipitation}mm"
-        if(weatherResponse?.snow != null) binding.PrecipitationImageArea.setImageResource(R.drawable.fall)
-        if(weatherResponse?.snow != null) binding.PrecipitationTitleArea.text = "강우량(mm/hr)"
+//        binding.Precipitation.text = "${precipitation}mm"
+//        if(weatherResponse?.snow != null) binding.PrecipitationImageArea.setImageResource(R.drawable.fall)
+//        if(weatherResponse?.snow != null) binding.PrecipitationTitleArea.text = "강우량(mm/hr)"
+//
+//        binding.SunLight.text = weatherResponse?.sys?.getCurrentSunLight().toString() + "시간"
 
-        binding.SunLight.text = weatherResponse?.sys?.getCurrentSunLight().toString() + "시간"
+        val rv = binding.WeatehrRv
+        val rvAdapter = WeatherRVAdapter(weatherForecastResponse!!.forecasts,requireContext())
+        rv.adapter = rvAdapter
+        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // 텍스트뷰에 적용
         binding.RecommendWearInfoArea.text = getSpannableString(weatherResponse!!,requireContext())
+
+//        binding.FeelTemperatureTextArea.text = weatherResponse.main.getFeelsLikeInCelsius().toString() + "°C"
 
         return binding.root
     }

@@ -10,6 +10,6 @@
         android:title="Time" />
     <item
         android:id="@+id/nav_search"
-        android:icon="@drawable/search_tab"
+        android:icon="@drawable/place_search"
         android:title="Search" />
 </menu>

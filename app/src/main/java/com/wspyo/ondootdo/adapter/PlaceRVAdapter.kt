@@ -33,11 +33,13 @@ class PlaceRVAdapter(private var items: List<Document>) : RecyclerView.Adapter<P
         val placeArea: TextView = view.findViewById(R.id.PlaceArea)
         val addressArea: TextView = view.findViewById(R.id.AddressArea)
         val placeItemArea: ConstraintLayout = view.findViewById(R.id.PlaceItemArea)
+        val categoryArea : TextView = view.findViewById(R.id.CategoryArea)
 
         // 아이템 데이터 바인딩
         fun bindItems(place: Document) {
             placeArea.text = place.place_name
             addressArea.text = place.address_name
+            categoryArea.text = place.category_name.split(">")[place.category_name.split(">").size-1]
         }
     }
 

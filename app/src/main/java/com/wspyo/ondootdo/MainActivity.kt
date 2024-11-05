@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            Log.d("MainActivity",menuItem.toString())
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     supportFragmentManager.beginTransaction()

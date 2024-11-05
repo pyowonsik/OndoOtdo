@@ -1,5 +1,7 @@
 package com.wspyo.ondootdo
 
+
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -73,9 +75,9 @@ class SearchFragment : Fragment() {
                     placeName = document.place_name
 
                     placeDetailViewModel.getPlaceDetailWeather(
-                            document.y.toDouble(),
-                            document.x.toDouble(),
-                            "dd488c2e7a32df4bc1e362d36f4a53ad"
+                        document.y.toDouble(),
+                        document.x.toDouble(),
+                        "dd488c2e7a32df4bc1e362d36f4a53ad"
                     )
                 }
             }
@@ -83,10 +85,10 @@ class SearchFragment : Fragment() {
 
         // weatherResponse 관찰자는 최초에 한 번만 등록
         placeDetailViewModel.weatherResponse.observe(viewLifecycleOwner) { temperature ->
-                if(isDialogOpen){
-                    val dialogFragment = PlaceDetailsFragment.newInstance(temperature,placeName)
-                    dialogFragment.show(parentFragmentManager, "placeDetail")
-                }
+            if(isDialogOpen){
+                val dialogFragment = PlaceDetailsFragment.newInstance(temperature,placeName)
+                dialogFragment.show(parentFragmentManager, "placeDetail")
+            }
         }
 
         // 검색 버튼 클릭 시에만 데이터 요청
