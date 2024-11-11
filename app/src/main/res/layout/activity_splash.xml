@@ -26,6 +26,7 @@
         android:textColor="@color/dark_orange"
         android:textSize="40sp"
         android:textStyle="bold"
+        android:fontFamily="@font/nalleana_yessam"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WeatherImageArea" />
