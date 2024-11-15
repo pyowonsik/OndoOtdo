@@ -1,43 +1,50 @@
 package com.wspyo.ondootdo
+
+import android.Manifest
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wspyo.ondootdo.databinding.ActivityMainBinding
-import com.wspyo.ondootdo.entity.TimeEntity
 import com.wspyo.ondootdo.viewModel.TimesViewModel
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
-import java.sql.Time
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var timesViewModel: TimesViewModel
+    private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    private val PERMISSION_REQUEST_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         timesViewModel = ViewModelProvider(this).get(TimesViewModel::class.java)
+        weatherViewModel = (applicationContext as MyApplication).weatherViewModel
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        // 초기 Fragment 설정 및  BottomNavigationView 클릭 리스너 설정
+        // 초기 Fragment 설정 및 BottomNavigationView 클릭 리스너 설정
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, MainFragment())
@@ -45,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            Log.d("MainActivity",menuItem.toString())
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     supportFragmentManager.beginTransaction()
@@ -53,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.nav_settings-> {
+                R.id.nav_settings -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, SettingFragment())
                         .commit()
@@ -68,10 +74,24 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        //
 
         // notification channel 생성
         createNotificationChannel()
+
+        // Android 13 이상에서 POST_NOTIFICATIONS 권한 요청
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    PERMISSION_REQUEST_CODE
+                )
+            }
+        }
 
         // Android 12 이상에서 SCHEDULE_EXACT_ALARM 권한 확인
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isExactAlarmPermissionGranted()) {
@@ -104,7 +124,6 @@ class MainActivity : AppCompatActivity() {
                     // 알람 예약 또는 취소 (isEnabled에 따라 처리)
                     scheduleNotification(calendar.timeInMillis, timeData.isEnabled, timeData.id)
                 }
-
             }
         }
     }
@@ -123,6 +142,7 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
     private fun scheduleNotification(timeInMillis: Long, isEnabled: Boolean, requestCode: Int) {
         val intent = Intent(this, NotificationReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -143,7 +163,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     // Android 12 이상에서 정확한 알람 권한이 부여되었는지 확인
     private fun isExactAlarmPermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -151,6 +170,26 @@ class MainActivity : AppCompatActivity() {
             alarmManager.canScheduleExactAlarms()
         } else {
             true
+        }
+    }
+
+    // 권한 요청 결과 처리
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 권한이 승인되었을 때
+                Log.d("Permission", "Notification permission granted")
+            } else {
+                // 권한이 거부되었을 때
+                Log.d("Permission", "Notification permission denied")
+                Toast.makeText(this, "알림 권한이 필요합니다.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

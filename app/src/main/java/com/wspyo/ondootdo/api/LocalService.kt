@@ -10,7 +10,8 @@ interface LocalService {
     suspend fun searchPlace(
         @Header("Authorization") apiKey: String,  // API 키
         @Query("query") query: String,            // 검색할 장소 이름
-//        @Query("page") page: Int = 1              // 검색 결과 페이지 번호 (선택 사항)
+        @Query("page") page: Int,             // 검색 결과 페이지 번호 (선택 사항)
+        @Query("size") size: Int = 10
     ): PlaceResponse
 }
 

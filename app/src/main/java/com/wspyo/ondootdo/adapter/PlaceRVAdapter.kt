@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wspyo.ondootdo.R
 import com.wspyo.ondootdo.model.local.Document
 
+
 class PlaceRVAdapter(private var items: List<Document>) : RecyclerView.Adapter<PlaceRVAdapter.ViewHolder>() {
 
     // 아이템 수 반환
@@ -59,3 +60,4 @@ class PlaceRVAdapter(private var items: List<Document>) : RecyclerView.Adapter<P
         notifyDataSetChanged()  // 어댑터에 데이터 변경 알림
     }
 }
+
