@@ -1,6 +1,7 @@
 package com.wspyo.ondootdo
 
 import WeatherForecastResponse
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -62,6 +63,7 @@ class MainFragment : Fragment() {
 //        if(weatherResponse?.snow != null) binding.PrecipitationTitleArea.text = "강우량(mm/hr)"
 //
 //        binding.SunLight.text = weatherResponse?.sys?.getCurrentSunLight().toString() + "시간"
+
 
         val rv = binding.WeatehrRv
         val rvAdapter = WeatherRVAdapter(weatherForecastResponse!!.forecasts,requireContext())
