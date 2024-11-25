@@ -39,7 +39,11 @@ class TimeRVAdapter(
         val textView: TextView = view.findViewById(R.id.TimeArea)
         val alarmButton: ImageButton = view.findViewById(R.id.AlarmBtn)
 
+
+
         fun bindItems(timeEntity: TimeEntity) {
+
+
             textView.text = timeEntity.time
 
             if(timeEntity.isEnabled) alarmButton.setImageResource(R.drawable.toggle_on)

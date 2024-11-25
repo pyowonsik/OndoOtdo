@@ -29,6 +29,18 @@ class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
     private lateinit var rvAdapter: TimeRVAdapter
     private val timesViewModel: TimesViewModel by activityViewModels()
+
+    var lastClickTime = 0L
+
+    fun isDoubleClickPrevented(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime < 500) { // 500ms 이내 클릭 무시
+            return true
+        }
+        lastClickTime = currentTime
+        return false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -66,15 +78,19 @@ class SettingFragment : Fragment() {
 
             rvAdapter.itemClick = object : TimeRVAdapter.ItemClick {
                 override fun onClick(view: View, position: Int) {
-                   val dialogFragment =
-                        TimeDetailsFragment.newInstance(it[position].id, false)
+                    if (isDoubleClickPrevented()) return // 중복 클릭 방지
+
+                    val dialogFragment = TimeDetailsFragment.newInstance(it[position].id, false)
                     dialogFragment.show(parentFragmentManager, "timesDetail")
                 }
 
                 override fun alarmClick(view: View, position: Int) {
+                    if (isDoubleClickPrevented()) return // 중복 클릭 방지
+
                     timesViewModel.updateAlarmStatus(it[position].id, !it[position].isEnabled)
                 }
             }
+
             Log.d("SettingFragment", it.toString())
         })
         //

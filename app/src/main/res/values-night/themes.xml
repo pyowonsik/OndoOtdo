@@ -1,7 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.OndoOtdo" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.OndoOtdo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+<!--        &lt;!&ndash; Customize your light theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/blue</item>-->
+<!--        <item name="colorPrimaryDark">@color/blue</item> &lt;!&ndash; 상태바 색상 &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/blue</item>-->
+        <item name="android:textColorPrimary">#000000</item> <!-- 텍스트 색을 검정색으로 설정 -->
+        <item name="android:statusBarColor">@color/very_light_yellow</item> <!-- 상태바 색상 설정 -->
+        <item name="android:fontFamily">@font/nalleana_yessam</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--        <item name="android:windowLightStatusBar">true</item> &lt;!&ndash; 상태바 텍스트 색상 (검정색) 설정 &ndash;&gt;-->
     </style>
+
+
+    <style name="Theme.OndoOtdo" parent="Base.Theme.OndoOtdo" />
 </resources>

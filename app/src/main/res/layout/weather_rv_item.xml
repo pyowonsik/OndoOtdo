@@ -10,6 +10,16 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/DateTextArea"
+        android:text="11.20"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/TimeTextArea"
         android:text="12시"
         android:textSize="20dp"

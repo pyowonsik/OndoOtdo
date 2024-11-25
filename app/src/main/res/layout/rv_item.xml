@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="현재 알람"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_marginLeft="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

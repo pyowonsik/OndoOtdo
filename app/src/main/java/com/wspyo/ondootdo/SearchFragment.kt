@@ -1,8 +1,6 @@
 package com.wspyo.ondootdo
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,42 +65,43 @@ class SearchFragment : Fragment() {
         localViewModel.placeResponse.observe(viewLifecycleOwner) { placeResponse ->
             placeRVAdapter.updateData(placeResponse)
 
-            if (placeResponse != null) {
-                binding.rv.visibility = View.VISIBLE
-                binding.EmptyDataArea.visibility = View.GONE
-            }
-
-            if (placeResponse.isEmpty()) {
+            if (placeResponse.isNullOrEmpty()) {
                 binding.rv.visibility = View.GONE
                 binding.EmptyDataArea.visibility = View.VISIBLE
+            } else {
+                binding.rv.visibility = View.VISIBLE
+                binding.EmptyDataArea.visibility = View.GONE
             }
 
             // PlaceRVAdapter의 아이템 클릭 리스너 설정
             placeRVAdapter.itemClick = object : PlaceRVAdapter.ItemClick {
                 override fun onClick(view: View, position: Int) {
-                    if (isDialogOpen) return
+                    if (isDialogOpen) return // 중복 클릭 방지
 
-                    isDialogOpen = true
+                    // position 범위 확인
+                    val placeResponse = localViewModel.placeResponse.value ?: return
+                    if (position !in placeResponse.indices) return
+
+                    isDialogOpen = true // 다이얼로그 표시 플래그 설정
                     val document = placeResponse[position]
                     placeName = document.place_name
+
+                    // 날씨 데이터 요청
                     placeDetailViewModel.getPlaceDetailWeather(
                         document.y.toDouble(),
                         document.x.toDouble(),
                         "dd488c2e7a32df4bc1e362d36f4a53ad"
                     )
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        isDialogOpen = false
-                    }, 500)
                 }
             }
+        }
 
-            // weatherResponse 관찰자 설정
-            placeDetailViewModel.weatherResponse.observe(viewLifecycleOwner) { temperature ->
-                if (isDialogOpen) {
-                    val dialogFragment = PlaceDetailsFragment.newInstance(temperature, placeName)
-                    dialogFragment.show(parentFragmentManager, "placeDetail")
-                }
+        // weatherResponse 관찰자 설정
+        placeDetailViewModel.weatherResponse.observe(viewLifecycleOwner) { temperature ->
+            if (isDialogOpen) {
+                isDialogOpen = false // 다이얼로그 표시 후 플래그 해제
+                val dialogFragment = PlaceDetailsFragment.newInstance(temperature, placeName)
+                dialogFragment.show(parentFragmentManager, "placeDetail")
             }
         }
 

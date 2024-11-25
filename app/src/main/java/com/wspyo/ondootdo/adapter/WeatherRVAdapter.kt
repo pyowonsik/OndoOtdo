@@ -37,6 +37,7 @@ class WeatherRVAdapter(
         private val temperatureTextView: TextView = view.findViewById(R.id.TemperatureTextArea)
         private val weatherTextView : TextView = view.findViewById(R.id.WeatherTextArea)
         private val timeTextView: TextView = view.findViewById(R.id.TimeTextArea)
+        private val dateTextView : TextView = view.findViewById(R.id.DateTextArea)
 
 
         fun bindItems(weather: WeatherForecast,position: Int) {
@@ -51,8 +52,9 @@ class WeatherRVAdapter(
 
             // 온도 및 시간 설정
             temperatureTextView.text = "${weather.main.getTempInCelsius()}°C"
-            timeTextView.text = weather.dateTime.split(" ")[0].split("-")[1] + "." +
-                    weather.dateTime.split(" ")[0].split("-")[2] + " " + weather.dateTime.split(" ")[1].split(":")[0] + "시"
+            dateTextView.text = weather.dateTime.split(" ")[0].split("-")[1] + "." +
+                    weather.dateTime.split(" ")[0].split("-")[2]
+            timeTextView.text = weather.dateTime.split(" ")[1].split(":")[0] + "시"
         }
     }
 }

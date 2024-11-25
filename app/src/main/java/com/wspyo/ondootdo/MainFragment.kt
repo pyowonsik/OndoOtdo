@@ -15,20 +15,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wspyo.ondootdo.adapter.TimeRVAdapter
 import com.wspyo.ondootdo.adapter.WeatherRVAdapter
 import com.wspyo.ondootdo.databinding.FragmentMainBinding
 import com.wspyo.ondootdo.entity.TimeEntity
 import com.wspyo.ondootdo.model.weather.WeatherResponse
+import com.wspyo.ondootdo.viewModel.QuotesViewModel
 
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
+import kotlin.random.Random
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var weatherViewModel : WeatherViewModel
+    private lateinit var quotesViewModel : QuotesViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +46,9 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
 
         weatherViewModel = (requireActivity().application as MyApplication).weatherViewModel
+        quotesViewModel = ViewModelProvider(this).get(QuotesViewModel::class.java)
+
+
         val weatherResponse : WeatherResponse? = weatherViewModel.weatherResponse.value
         val weatherForecastResponse : WeatherForecastResponse? = weatherViewModel.weatherForecast.value
 
@@ -73,7 +82,14 @@ class MainFragment : Fragment() {
         // 텍스트뷰에 적용
         binding.RecommendWearInfoArea.text = getSpannableString(weatherResponse!!,requireContext())
 
-//        binding.FeelTemperatureTextArea.text = weatherResponse.main.getFeelsLikeInCelsius().toString() + "°C"
+//        // 랜덤 Quote 로드
+//        quotesViewModel.loadRandomQuote()
+//
+//        // 데이터 관찰
+//        quotesViewModel.randomQuote.observe(viewLifecycleOwner) { quote ->
+//            binding.QuotesTextContentArea.text = quote
+//        }
+
 
         return binding.root
     }
