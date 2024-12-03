@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.wspyo.ondootdo.viewModel.WeatherViewModel
@@ -24,38 +25,37 @@ class NotificationReceiver : BroadcastReceiver() {
 
             // Application을 통해 ViewModel에 접근
             weatherViewModel = (it.applicationContext as MyApplication).weatherViewModel
+            val currentTemp = weatherViewModel.weatherResponse.value?.main?.getTempInCelsius()?.toString()
+            val currentWeather = weatherViewModel.weatherResponse.value?.weather?.firstOrNull()?.getCurrentWeather()
 
-            val currentTemp = weatherViewModel.weatherResponse.value?.main?.getTempInCelsius()?.toString() ?: "정보 없음"
-            val currentWeather = weatherViewModel.weatherResponse.value?.weather?.firstOrNull()?.getCurrentWeather() ?: "정보 없음"
+            Log.d("NotificationReceiver", currentTemp.toString())
+            Log.d("NotificationReceiver", currentWeather.toString())
 
-            // Android 13 이상에서는 POST_NOTIFICATIONS 권한이 필요
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                 context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 // 권한이 없으면 알림을 표시하지 않음
                 return
             }
 
-            // 알림 채널 생성
+            val notificationMessage = if (!currentTemp.isNullOrEmpty() && !currentWeather.isNullOrEmpty()) {
+                "현재 온도: ${currentTemp}도\n현재 날씨: ${currentWeather}"
+            } else {
+                "알람이 울렸습니다. 어플을 확인해 주세요."
+            }
+
             createNotificationChannel(it)
 
-            // 알림 생성
             val notification = NotificationCompat.Builder(it, "channel_id")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("OndoOtdo 알림")
-                .setStyle(
-                    NotificationCompat.BigTextStyle()
-                        .bigText("현재 온도: ${currentTemp}도\n현재 날씨: ${currentWeather}")
-                )
+                .setStyle(NotificationCompat.BigTextStyle().bigText(notificationMessage))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build()
 
-            // 알림 표시
             with(NotificationManagerCompat.from(it)) {
                 notify(1, notification)
             }
 
-            // 진동 추가 (다섯 번 반복)
-            vibratePhone(it)
         }
     }
 
@@ -75,31 +75,6 @@ class NotificationReceiver : BroadcastReceiver() {
             val notificationManager: NotificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    // 다섯 번 반복 진동 메서드
-    private fun vibratePhone(context: Context) {
-        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        val vibrationDuration = 500L // 진동 시간 (밀리초)
-        val pauseDuration = 300L // 대기 시간 (밀리초)
-        val repeatCount = 20 // 반복 횟수
-
-        // 진동 패턴 생성
-        val pattern = mutableListOf<Long>().apply {
-            add(0) // 처음 시작 대기 시간
-            repeat(repeatCount) {
-                add(vibrationDuration) // 진동 시간
-                add(pauseDuration) // 대기 시간
-            }
-        }.toLongArray()
-
-        // 진동 패턴을 5번 반복
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createWaveform(pattern, 0)) // 0으로 설정하여 계속 반복
-        } else {
-            @Suppress("DEPRECATION")
-            vibrator.vibrate(pattern, 0) // 0으로 설정하여 계속 반복
         }
     }
 }
