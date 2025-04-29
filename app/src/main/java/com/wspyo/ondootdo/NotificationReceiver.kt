@@ -40,7 +40,7 @@ class NotificationReceiver : BroadcastReceiver() {
             val notificationMessage = if (!currentTemp.isNullOrEmpty() && !currentWeather.isNullOrEmpty()) {
                 "현재 온도: ${currentTemp}도\n현재 날씨: ${currentWeather}"
             } else {
-                "알람이 울렸습니다. 어플을 확인해 주세요."
+                "어플을 확인하여 오늘 기온 및 옷차림을 확인해보세요."
             }
 
             createNotificationChannel(it)
